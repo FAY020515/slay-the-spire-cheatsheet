@@ -890,11 +890,11 @@ label.fl{display:block;font-size:12.5px;color:var(--ink-2);margin:10px 0 4px}
   /* ---------- 卡组诊断器 ---------- */
   var GROUPS = {
     basic:  {name:'基础牌',   ws:['打击','防御','strike','defend']},
-    aoe:    {name:'群体输出', ws:['全体','所有敌人','旋风斩','电动力学','死吧','尸爆','祭礼','whirlwind','electrodynamics','die','corpse','consecrate','bowling','conclude']},
-    defense:{name:'防御体系', ws:['格挡','冰霜','尖啸','幽魂','步法','残像','心灵堡垒','壁垒','不以为意','铁流','冲刺','冰川','frost','glacier','piercing','wraith','footwork','after image','mental fortress','barricade','shrug','iron wave','dash']},
-    draw:   {name:'过牌',     ws:['抽','杂技','精算','预谋','rushdown','acrobatics','gamble','prepared','adrenaline','offering','献祭','黑暗拥抱','dark embrace','burning pact','燃烧契约','scrawl','飞掠']},
-    finish: {name:'核心输出', ws:['力量','重刃','极限突破','剧毒','催化','淬毒','闪电','球状闪电','寒流','黑暗','爪击','连击','愤怒','爆发','警觉','strength','heavy blade','limit break','poison','catalyst','lightning','ball lightning','claw','flurry','eruption','vigilance','demon','恶魔']},
-    thin:   {name:'精简消耗', ws:['消耗','exhaust','腐化','corruption','无痛','feel no pain','second wind','true grit','坚韧']}
+    aoe:    {name:'群体输出', ws:['全体','所有敌人','旋风斩','电动力学','死吧','尸爆','祭礼','whirlwind','electrodynamics','die','corpse','consecrate','bowling','conclude','顺劈斩','闪电霹雳','金刚臂','震荡波','火焰吐息','自燃','恶魔之焰','匕首雨','死吧死吧死吧','毒雾','勒脖','千刀万剐','炸弹','弹幕齐射','扫荡射线','编译冲击','愁云惨淡','暴风雪','结末','供奉','疾风连击','流云飞袖','追击','回旋踢','乱战']},
+    defense:{name:'防御体系', ws:['格挡','冰霜','尖啸','幽魂','步法','残像','心灵堡垒','壁垒','不以为意','铁流','冲刺','冰川','frost','glacier','piercing','wraith','footwork','after image','mental fortress','barricade','shrug','iron wave','dash','岿然不动','硬撑','重振精神','坚毅','火焰屏障','幽灵铠甲','耸肩无视','无惧疼痛','巩固','武装','幽灵形态','后空翻','闪躲翻滚','灵动步法','偏折','斗篷与匕首','本能反应','扫腿','残影','余像','铁蒺藜','毒雾','计划妥当','必备工具','蒸汽护壁','自动护盾','力场','缓冲','遗传算法','冰寒','均衡','全息影像','飞跃','堆栈','如水','护身','坚韧','精神护盾','内心宁静','冥想','停顿','安宁','评估','化体为空','化智为空','摆手','包扎','深呼吸','净化','万能药','灵体','结茧','急躁']},
+    draw:   {name:'过牌',     ws:['抽','杂技','精算','预谋','rushdown','acrobatics','gamble','prepared','adrenaline','offering','献祭','黑暗拥抱','dark embrace','burning pact','燃烧契约','scrawl','飞掠','战斗专注','战吼','双持','发掘','断魂斩','放血','狂怒','盛怒','无谋冲锋','头槌','剑柄打击','哨卫','计算下注','早有准备','逃脱计划','独门技术','全神贯注','战术大师','肾上腺素','子弹时间','爆发','部署','双重存在','快速检索','略读','超频','白噪声','启动流程','汇聚','散热片','你好世界','机器学习','循环','内在宁静','他山之石','研习','先见之明','天眼','收集','羽化','妙计','花样百出','发现','转化','战略大师','灵巧']},
+    finish: {name:'核心输出', ws:['力量','重刃','极限突破','剧毒','催化','淬毒','闪电','球状闪电','寒流','黑暗','爪击','连击','愤怒','爆发','警觉','strength','heavy blade','limit break','poison','catalyst','lightning','ball lightning','claw','flurry','eruption','vigilance','demon','恶魔','恶魔形态','突破极限','飞剑回旋镖','死亡收割','重锤','燔祭','全身撞击','势不可当','残杀','狂宴','祭品','旋风斩','催化剂','尸爆术','凌迟','华丽收场','玻璃刀刃','串刺','千穿百刺','终结技','陨石打击','超能光束','暴雪','雷霆打击','万物一心','核心电涌','暴怒','化拳为空','碰撞连击','招牌技','以手拒之','当头棒喝','旋身','光辉','渎神','聚能成刃','诸神之黄昏','腾跃','暴力','贪婪之手','神化','燃烧','观察弱点','连续拳','飞身踢','无谋冲锋','暴走','以血还血','御血术','上勾拳','狂野打击','双重打击','剑柄打击','头槌','完美打击','铁斩波','碎','斩破命运','点穴','邪眼']},
+    thin:   {name:'精简消耗', ws:['消耗','exhaust','腐化','corruption','无痛','feel no pain','second wind','true grit','坚韧','无惧疼痛','坚毅','硬撑','重振精神','断魂斩','恶魔之焰','灼热攻击','破灭','黑暗之拥','燃烧契约','真气']}
   };
 
   function parseDeck(text){
@@ -1049,7 +1049,7 @@ var CARD_DB = {
 war: [
  ['打击','Strike'],['防御','Defend'],['痛击','Bash'],
  ['愤怒','Anger'],['顺劈斩','Cleave'],['双重打击','Twin Strike'],['全身撞击','Body Slam'],['重刃','Heavy Blade'],['铁斩波','Iron Wave'],['完美打击','Perfected Strike'],['剑刃回旋','Sword Boomerang'],['闪电霹雳','Thunderclap'],['狂野打击','Wild Strike'],['金刚臂','Clothesline'],['头槌','Headbutt'],['上勾拳','Uppercut'],['剑柄打击','Pommel Strike'],['战吼','Battle Trance'],['以血还血','Blood for Blood'],['灼热打击','Searing Blow'],
- ['武装','Armaments'],['放血','Bloodletting'],['燃烧契约','Burning Pact'],['大屠杀','Carnage'],['燃烧','Combust'],['黑暗之拥','Dark Embrace'],['缴械','Disarm'],['双持武器','Dual Wield'],['坚守','Entrench'],['进化','Evolve'],['柔韧','Flex'],['幽魂护甲','Ghostly Armor'],['血流澎湃','Hemokinesis'],['观察弱点','Inflame'],['威慑','Intimidate'],['狂怒','Rage'],['暴走','Rampage'],['破裂','Rupture'],['看见红色','Seeing Red'],['哨兵','Sentinel'],['斩断灵魂','Sever Soul'],['不以为意','Shrug It Off'],['旋风斩','Whirlwind'],
+ ['武装','Armaments'],['放血','Bloodletting'],['燃烧契约','Burning Pact'],['大屠杀','Carnage'],['燃烧','Combust'],['黑暗之拥','Dark Embrace'],['缴械','Disarm'],['双持武器','Dual Wield'],['坚守','Entrench'],['进化','Evolve'],['柔韧','Flex'],['幽魂护甲','Ghostly Armor'],['血流澎湃','Hemokinesis'],['燃烧','Inflame'],['观察弱点','Spot Weakness'],['威慑','Intimidate'],['狂怒','Rage'],['暴走','Rampage'],['破裂','Rupture'],['看见红色','Seeing Red'],['哨兵','Sentinel'],['斩断灵魂','Sever Soul'],['不以为意','Shrug It Off'],['旋风斩','Whirlwind'],
  ['狂暴','Berserk'],['重锤','Bludgeon'],['残暴','Brutality'],['腐化','Corruption'],['恶魔形态','Demon Form'],['连击','Double Tap'],['祭品','Offering'],['固若金汤','Impervious'],['势不可当','Juggernaut'],['突破极限','Limit Break'],['收割者','Reaper'],
  ['交锋','Clash'],
  ['飞身踢','Dropkick'],
