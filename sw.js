@@ -1,5 +1,5 @@
 // 杀戮尖塔速查表 · 离线缓存
-var CACHE = 'sts-cheat-v3';
+var CACHE = 'sts-cheat-v4';
 var ASSETS = [
   './',
   './sts-cheatsheet.html',
