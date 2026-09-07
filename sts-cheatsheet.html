@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="Wq4lOGd2y5tfNXPP6NfZ50">
+<head data-page-node-id="8klL9Py2jEYK4urDcAFE6q">
+<meta charset="UTF-8" data-page-node-id="9w5yQ3CzkV824bjU1b1h2o">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="Yw8AyhwbWu6iDoMcJ2Fp2U">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#f6f4ef">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="StS 速查">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<title>杀戮尖塔 速查表 · Switch 版</title>
+<style>
+:root{
+  --bg:#f6f4ef;
+  --card:#ffffff;
+  --ink:#23201c;
+  --ink-2:#5d574e;
+  --ink-3:#8b8378;
+  --line:#e4dfd5;
+  --good:#2f7d4f;
+  --warn:#b4762a;
+  --bad:#b3453c;
+  --accent:#7a5cc4;
+}
+*{box-sizing:border-box;-webkit-text-size-adjust:100%}
+body{
+  margin:0;padding:0;background:var(--bg);color:var(--ink);
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,sans-serif;
+  font-size:15px;line-height:1.65;
+}
+header{
+  padding:20px 16px 12px;text-align:center;border-bottom:1px solid var(--line);
+  background:linear-gradient(180deg,#fffdf8,#f6f4ef);
+}
+header h1{margin:0;font-size:20px;letter-spacing:1px}
+header p{margin:6px 0 0;font-size:12px;color:var(--ink-3)}
+
+nav{
+  position:sticky;top:0;z-index:10;background:#fffdf8;
+  border-bottom:1px solid var(--line);
+  display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;
+}
+nav button{
+  flex:0 0 auto;border:none;background:none;padding:12px 16px;
+  font-size:14px;color:var(--ink-2);cursor:pointer;
+  border-bottom:2px solid transparent;font-family:inherit;
+}
+nav button.on{color:var(--ink);border-bottom-color:var(--accent);font-weight:600}
+
+main{max-width:820px;margin:0 auto;padding:14px 14px 60px}
+.panel{display:none}
+.panel.on{display:block}
+
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:14px 16px;margin-bottom:14px;
+}
+.card h2{
+  margin:0 0 10px;font-size:16px;display:flex;align-items:center;gap:8px;
+}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:0 0 auto}
+.card h3{margin:14px 0 6px;font-size:14px;color:var(--ink-2)}
+.card h3:first-of-type{margin-top:4px}
+ul{margin:6px 0;padding-left:20px}
+li{margin:3px 0}
+p{margin:6px 0}
+.k{font-weight:600}
+.g{color:var(--good);font-weight:600}
+.w{color:var(--warn);font-weight:600}
+.b{color:var(--bad);font-weight:600}
+.muted{color:var(--ink-3);font-size:13px}
+
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+th{background:#faf7f1;font-weight:600}
+tr:nth-child(even) td{background:#fdfcfa}
+
+blockquote{
+  margin:10px 0;padding:10px 12px;border-left:3px solid var(--accent);
+  background:#faf8fd;border-radius:0 8px 8px 0;font-size:14px;
+}
+blockquote p{margin:0}
+
+.tag{
+  display:inline-block;font-size:11px;padding:1px 7px;border-radius:20px;
+  border:1px solid var(--line);color:var(--ink-2);margin-right:4px;
+}
+.tag.good{color:var(--good);border-color:#b9dcc5;background:#f2faf5}
+.tag.warn{color:var(--warn);border-color:#e8d3b3;background:#fdf8ef}
+.tag.bad{color:var(--bad);border-color:#e8c3bf;background:#fdf4f3}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+.box{border:1px solid var(--line);border-radius:8px;padding:9px 11px;background:#fdfcfa}
+.box .t{font-size:12.5px;font-weight:600;margin-bottom:4px}
+
+footer{text-align:center;font-size:12px;color:var(--ink-3);padding:18px 12px 40px}
+@media print{
+  nav{display:none}.panel{display:block!important}
+  .card{break-inside:avoid}
+}
+
+.io{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-family:inherit;font-size:14px;color:var(--ink);background:#fff}
+textarea.io{min-height:130px;resize:vertical;line-height:1.6}
+label.fl{display:block;font-size:12.5px;color:var(--ink-2);margin:10px 0 4px}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.row>div{flex:1 1 160px}
+.btn{margin-top:10px;padding:9px 18px;border:none;border-radius:8px;background:var(--accent);color:#fff;font-size:14px;cursor:pointer;font-family:inherit}
+.btn:active{opacity:.85}
+.out{margin-top:12px}
+.msg{border-left:3px solid var(--line);padding:8px 11px;border-radius:0 8px 8px 0;margin:7px 0;background:#fdfcfa;font-size:14px}
+.msg.g{border-color:#b9dcc5;background:#f2faf5}
+.msg.w{border-color:#e8d3b3;background:#fdf8ef}
+.msg.b{border-color:#e8c3bf;background:#fdf4f3}
+.stat{font-size:13px;color:var(--ink-3);margin-top:6px}
+
+</style>
+</head>
+<body data-page-node-id="FEwxugEipjRDz2k1L2EdOZ">
+
+<header data-page-node-id="Gwyd8OIEOwkliDiVEqR14w">
+  <h1 data-page-node-id="a1YXSwN31VBqDf6Scus8Nc">杀戮尖塔 · 开荒速查表</h1>
+  <p data-page-node-id="A2vKkypMUWv11TWKYPL4Ew">Switch 版 · 卡牌译名以游戏内实际显示为准，按效果识别</p>
+</header>
+
+<nav data-page-node-id="KNK0HSE1VdZ6DHWvdiIJDx">
+  <button class="on" data-t="p0" data-page-node-id="VI5fY5kW4ZY3utPPVTz9p3">通用铁律</button>
+  <button data-t="p6">开局模板</button>
+  <button data-t="p7">敌人图鉴</button>
+  <button data-t="p8">决策清单</button>
+  <button data-t="p9">遗物分级</button>
+  <button data-t="p1" data-page-node-id="tUHFJnN3fDuRWG9F0Yc1gk">战士</button>
+  <button data-t="p2" data-page-node-id="qV6tq9CnNkFUo2FYlwWhG6">静默猎手</button>
+  <button data-t="p3" data-page-node-id="kmmTvdcFdzJsm58qA3vHVI">机器人</button>
+  <button data-t="p4" data-page-node-id="tv1pdmuYVOTkftWSlsCS36">观者</button>
+  <button data-t="p5" data-page-node-id="8fDWHz20N18Fn4KQIzNZ4C">Boss</button>
+  <button data-t="p10">工具</button>
+</nav>
+
+<main data-page-node-id="uOXdSy0U8lYfReK9qPCtZy">
+
+<!-- 通用 -->
+<section class="panel on" id="p0" data-page-node-id="yNvNGX1VclCS2i28ezY3id">
+  <div class="card" data-page-node-id="N1ZvO3efTX0W0ZqPP4pz1E">
+    <h2 data-page-node-id="RvprC2IETip4PCrZ9XIDw6"><span class="dot" style="background:#7a5cc4" data-page-node-id="ovV3iwgrPHzc3VqC7hPwVk"></span>三条铁律</h2>
+    <h3 data-page-node-id="fJ1ShB2Cq72EbwuDqX7weQ">1. 这不是收集游戏，是删牌游戏</h3>
+    <p data-page-node-id="JvCSdRWZQ7o44lMhpSjxWZ">目标卡组 <span class="k" data-page-node-id="lLMF0wrXL0tErhg0SJamnW">20 张以内</span>，15 张是神仙局。每拿一张牌问自己："抽到它我开心吗？" —— 犹豫就是不要。</p>
+    <h3 data-page-node-id="oucdLtrZjoqBZNnTmtaeMC">2. 商店第一优先级是删牌</h3>
+    <p data-page-node-id="0rFhwUWrvJnyNj5OkPXwDl">见到「移除卡牌」就买。删除顺序：先删基础<span class="k" data-page-node-id="b3rgAINuu3GCJHlTmcqvwg">打击</span>，后删<span class="k" data-page-node-id="QGlkWPTA6vBuDUc3KfMAi6">防御</span>。把 5 张打击砍到 2 张，卡组立刻脱胎换骨。</p>
+    <h3 data-page-node-id="VdGZcdU3VwKNlCDjodL3Xx">3. 血量是资源，不是命</h3>
+    <p data-page-node-id="Xt8sXfehY2fQsuRpgiBNb9">血可以换遗物、换升级、换精英怪。<span class="k" data-page-node-id="X2gOGVCypRCzhdjVCH5Zun">血量低于 50%-60% 才睡觉</span>，否则一律升级卡牌。升级只给最常打的那张牌。</p>
+  </div>
+
+  <div class="card" data-page-node-id="PfnY8LSLyFYfWl6Eykfddy">
+    <h2 data-page-node-id="GFLHDHF5CEVWyGJ3PhV2tG"><span class="dot" style="background:#7a5cc4" data-page-node-id="z454AVfw8WEGrKuCWZAv0r"></span>地图与战斗</h2>
+    <ul data-page-node-id="eCfGfDwsrCVyAdLmsUih7C">
+      <li data-page-node-id="hHV4sEacXWnO1MAzihmWGP"><span class="k" data-page-node-id="DJpGm4nOBUnw6JQ5Z0vJxP">第一层尽量打 2 个精英怪</span> —— 遗物是滚雪球的唯一来源。</li>
+      <li data-page-node-id="6qjczWxqfxYoCbgnbKGH52">问号事件<span class="k" data-page-node-id="ghYM3F1FsnOz0TAb3E1qvk">上层多走、下层少走</span>，第三层事件大多是坑。</li>
+      <li data-page-node-id="mt7Vf8G7IEY2X38z6jfZc2">路线提前看整张图：精英多 + 篝火位置合适 + 商店在打完精英之后。</li>
+      <li data-page-node-id="th03ASnGekeot0GSS3Lqwa">敌人头顶的<span class="k" data-page-node-id="oUnxDzbBrSBkkyHDK4YABU">意图图标必看</span>：攻击就防御，格挡/强化就全力输出。</li>
+      <li data-page-node-id="Mxn1LqyFK2t2H4v0Dcox3m"><span class="k" data-page-node-id="c9hMhShcEm4okgaEGf86YM">能这回合杀掉就别防御</span>，多拖一轮就多吃一轮伤害。</li>
+      <li data-page-node-id="VBtvYieRaDyBk7OmuxogRV">药水别囤，Boss 战和精英战直接用掉。</li>
+    </ul>
+  </div>
+
+  <div class="card" data-page-node-id="UZjkCNjT3cWFAChJ1SC4il">
+    <h2 data-page-node-id="hipmR88UBwYHzxqwDuQeHu"><span class="dot" style="background:#7a5cc4" data-page-node-id="UQrvBuxHQVuBWAsCu3CGuz"></span>新手五个坑</h2>
+    <table data-page-node-id="0PYCAD0o0lhI71iaUHls4g">
+      <tr data-page-node-id="OhewNIZhBPUQ7GHERVhkBF"><th style="width:40%" data-page-node-id="nxcsqBJXCGVOSwPBJTbTu2">坑</th><th data-page-node-id="n77hOTl4cPczcgllaD3SSQ">为什么</th></tr>
+      <tr data-page-node-id="Yi2tzjwIHTEcMIijV8T0nj"><td class="b" data-page-node-id="ZQUUPkh5qtSek7czdX2SiU">见牌就拿</td><td data-page-node-id="cBpXsDMHFZfVy80Iw5aXOI">卡组 40 张，永远抽不到关键牌</td></tr>
+      <tr data-page-node-id="B4SSeC19sn3LJ2bBgbtZDC"><td class="b" data-page-node-id="GHiGchLsFErW7Lpfqadd85">升级没用的牌</td><td data-page-node-id="GDRUIdJ7wbVQI5ZLNEOXrE">升级只给核心牌</td></tr>
+      <tr data-page-node-id="0flM2Vkj8Yt2HJXzAtICTW"><td class="b" data-page-node-id="CSYERiRyCus59dikg3TAeu">套路摇摆</td><td data-page-node-id="SGIGCW1yUddXshPw92HgkU">力量流混中毒流 = 两套都不成型，第一层末必须定方向</td></tr>
+      <tr data-page-node-id="WVEYxScFo1qp7xIODyCrcH"><td class="b" data-page-node-id="i3OggyvxMaZgNKLOt1AscX">忽视消耗（Exhaust）牌</td><td data-page-node-id="zx6mBgzSHxw4qSrP1BmoKo">打完就消失的牌是"临时增益"，前期非常强</td></tr>
+      <tr data-page-node-id="SazGy1BcaQAa0RDG7ns6Ov"><td class="b" data-page-node-id="1U11PxlKmH9itNpTThXI3V">拿太多 3 费大牌</td><td data-page-node-id="uXbUqSsB9Fug0gSkbqJGF6">起手抽到就是卡手，卡手一次可能就是死</td></tr>
+    </table>
+  </div>
+
+  <div class="card" data-page-node-id="e8zY6Y7dvZbuLda3S1pZRf">
+    <h2 data-page-node-id="CqVJS95ROgW1yGzPRNzHBc"><span class="dot" style="background:#7a5cc4" data-page-node-id="XDoJZ8FaN7Ky3KbFJbvrvB"></span>角色上手顺序</h2>
+    <table data-page-node-id="NmlKTvohOBRWe7nYgZloGh">
+      <tr data-page-node-id="MiTRxMmSMrMX57xC8F4gHy"><th style="width:22%" data-page-node-id="ULQVCQ5CoH7Y3SHufEaC1D">顺序</th><th style="width:30%" data-page-node-id="mOGzoV3KLWuzfaj2Veui5n">角色</th><th data-page-node-id="QmBQwPRFAJP2YgPT0dRD5B">理由</th></tr>
+      <tr data-page-node-id="ZfK4fnOhEMmgcFSC6OMxkw"><td data-page-node-id="49TlGxPS9L2ILBwECTZ9o1">1</td><td class="k" data-page-node-id="s6z2DmMfItEiiNGx2jtaHw">战士</td><td data-page-node-id="zPXCKFXgXaWpdDWx2VXGBb">自带回血，容错最高</td></tr>
+      <tr data-page-node-id="XCTKhxHu7kD3b9oy60YmMU"><td data-page-node-id="h4RhqjeIou8CoLqBYBdYQS">2</td><td class="k" data-page-node-id="COQxPGrgQxWrktnp7NqTtv">静默猎手</td><td data-page-node-id="AeYLBA6WQCGV2qchVptJdr">中毒/弃牌思路清晰，学会"精简"的价值</td></tr>
+      <tr data-page-node-id="uNXNfRVRee0WDqMyzjMDbX"><td data-page-node-id="LoXrI6Y8iPDyAK8ZCh5HC0">3</td><td class="k" data-page-node-id="aKGSdy5CvNqQE0D9Xugimc">机器人</td><td data-page-node-id="KwmAFI3YgQGHlpbD5XzORR">球位机制绕，卡组要求高</td></tr>
+      <tr data-page-node-id="mCmFpg4LDL0e2EQHuGcRJ7"><td data-page-node-id="CMB1O5Dc1Vw2NEn2k7sOTb">4</td><td class="k" data-page-node-id="PszKE2gXns31GMjd287Q1G">观者</td><td data-page-node-id="OFXqqo7GasWh3oJJlB7aMi">上限最高，姿态切换反直觉</td></tr>
+    </table>
+    <p class="muted" data-page-node-id="FnCiJTd6mEPW7hkCquatF9">先把每个角色通关一次（A0），再考虑爬 ascension 难度。</p>
+  </div>
+</section>
+
+
+<!-- 开局模板 -->
+<section class="panel" id="p6">
+  <div class="card">
+    <h2><span class="dot" style="background:#b4762a"></span>第一层生存模板</h2>
+    <blockquote><p>第一层的唯一目标：<span class="k">活到 Boss，并且卡组别变胖</span>。不是"打赢每一场"，是"用最少的代价换到最多的资源"。</p></blockquote>
+
+    <h3>标准时间线</h3>
+    <table>
+      <tr><th style="width:20%">阶段</th><th style="width:38%">做什么</th><th>关键点</th></tr>
+      <tr>
+        <td class="k">1. 前 3 场<br>普通战斗</td>
+        <td>唯一目的：<span class="k">补 2-3 张输出牌</span></td>
+        <td>见到优质攻击牌就拿。输出不够<span class="b">绝对不要</span>进精英</td>
+      </tr>
+      <tr>
+        <td class="k">2. 第一个商店</td>
+        <td>第一件事：<span class="k">删 1 张打击</span></td>
+        <td>优先级：删牌 &gt; 关键牌 &gt; 遗物 &gt; 药水</td>
+      </tr>
+      <tr>
+        <td class="k">3. 第一个精英</td>
+        <td>条件：<span class="k">血量 ≥ 70% 且已有 2 张新攻击牌</span></td>
+        <td>带一瓶药水再进。第一层精英平均要掉 20-30 血，把它当"花血买遗物"</td>
+      </tr>
+      <tr>
+        <td class="k">4. 篝火</td>
+        <td>血 &lt; 50%（战士）/ &lt; 60%（其他角色）睡觉，否则升级</td>
+        <td>只升级核心牌，别升级"以后会用到"的牌</td>
+      </tr>
+      <tr>
+        <td class="k">5. Boss 前</td>
+        <td>留一个篝火升级核心牌，药水补齐</td>
+        <td>至少 <span class="k">50% 血</span>进 Boss，低于这个数先睡觉</td>
+      </tr>
+    </table>
+
+    <h3>打 Boss 前，卡组应该长这样（自检清单）</h3>
+    <ul>
+      <li>卡组 <span class="k">12-18 张</span>（起手 10-12 张 + 3-6 张新牌）</li>
+      <li>已经删掉 <span class="k">1-2 张打击</span></li>
+      <li>拿到 <span class="k">至少 1 个精英遗物</span></li>
+      <li>有 <span class="k">至少 1 张</span>能打的输出牌（AOE 或高效单卡）</li>
+      <li>核心牌已升级 <span class="k">1-2 张</span></li>
+    </ul>
+    <p class="muted">上面五条里有三条没达成，说明这局第一层打得太保守 —— 精英怪打少了。</p>
+
+    <h3>各角色第一层该补的输出牌</h3>
+    <table>
+      <tr><th style="width:22%">角色</th><th>优先补的输出</th></tr>
+      <tr><td class="k">战士</td><td>铁流、旋风斩、各类高质量攻击牌（别拿 3 费大牌）</td></tr>
+      <tr><td class="k">猎手</td><td>冲刺、淬毒之刃、死吧死吧死吧；<span class="k">先补输出再删打击</span></td></tr>
+      <tr><td class="k">机器人</td><td>球状闪电、寒流；有电动力学直接起飞</td></tr>
+      <tr><td class="k">观者</td><td>多段攻击牌、空拳；核心是把「爆发」和「警觉」升到 1 费</td></tr>
+    </table>
+  </div>
+</section>
+
+
+<!-- 敌人图鉴 -->
+<section class="panel" id="p7">
+  <div class="card">
+    <h2><span class="dot" style="background:#b3453c"></span>状态与关键词（先懂这个）</h2>
+    <table>
+      <tr><th style="width:26%">状态</th><th>含义</th></tr>
+      <tr><td class="k">易伤 Vulnerable</td><td>受到伤害 +50%，最危险的 debuff</td></tr>
+      <tr><td class="k">虚弱 Weak</td><td>造成伤害 -25%</td></tr>
+      <tr><td class="k">力量 Strength</td><td>每次攻击额外造成 X 点（本场战斗持续）</td></tr>
+      <tr><td class="k">敏捷 Dexterity</td><td>每次获得格挡额外 +X</td></tr>
+      <tr><td class="k">无形 Intangible</td><td>受到的所有伤害变为 1（双向都有，敌人有也极难打）</td></tr>
+      <tr><td class="k">人工制品 Artifact</td><td>抵消下一次负面效果</td></tr>
+      <tr><td class="k">金属化 Metallicize</td><td>回合结束时自动获得格挡</td></tr>
+      <tr><td class="k">聚焦 Focus</td><td>机器人专有，让所有球的数值变强</td></tr>
+      <tr><td class="k">真言 Mantra</td><td>观者专有，攒满进入神格（伤害 ×3）</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2><span class="dot" style="background:#b3453c"></span>精英怪应对（新手死得最多的地方）</h2>
+    <p class="muted">精英怪必掉遗物 + 更多金币，是必须打的；但每个精英都有"打法"，硬莽就是送。以下讲机制与破解思路，具体数值以游戏内为准。</p>
+
+    <h3>第一层</h3>
+    <table>
+      <tr><th style="width:22%">精英</th><th style="width:40%">机制</th><th>破解</th></tr>
+      <tr>
+        <td class="k">地精头目<br><span class="muted">Gremlin Nob</span></td>
+        <td><span class="b">你每打出一张技能牌，它就获得力量</span> —— 越打越痛</td>
+        <td>少打技能牌、多打攻击牌；带格挡的攻击牌（冲刺、铁流）最佳。<span class="k">残血千万别进</span></td>
+      </tr>
+      <tr>
+        <td class="k">拉加维林<br><span class="muted">Lagavulin</span></td>
+        <td>开局<span class="k">在睡觉</span>（高格挡、吃不到伤害），几回合后醒来并给全体上 debuff</td>
+        <td>别急着打醒它。<span class="k">利用睡眠期铺 buff</span>：叠力量、上毒、加敏捷、过牌。准备好了再开打</td>
+      </tr>
+      <tr>
+        <td class="k">哨卫三人组<br><span class="muted">Sentries</span></td>
+        <td>轮流往你牌堆里<span class="b">塞废牌（眩晕）</span>，拖久了牌堆全是垃圾</td>
+        <td><span class="k">优先集火秒掉一只</span>减少循环；这场战斗不能拖长</td>
+      </tr>
+    </table>
+
+    <h3>第二层</h3>
+    <table>
+      <tr><th style="width:22%">精英</th><th style="width:40%">机制</th><th>破解</th></tr>
+      <tr>
+        <td class="k">地精首领<br><span class="muted">Gremlin Leader</span></td>
+        <td><span class="b">不断召唤小弟</span>，并强化全体</td>
+        <td>要么 AOE 清小弟、要么爆发速杀本体，<span class="k">绝对不能陷入消耗战</span></td>
+      </tr>
+      <tr>
+        <td class="k">刺杀之书<br><span class="muted">Book of Stabbing</span></td>
+        <td><span class="b">多段攻击，且段数逐回合增加</span></td>
+        <td>需要真正的格挡体系（冰霜球、荆棘、高格挡牌）；<span class="k">速杀，越拖越痛</span></td>
+      </tr>
+      <tr>
+        <td class="k">工头<br><span class="muted">Taskmaster</span></td>
+        <td>每回合给你<span class="b">叠 debuff</span>（虚弱 / 易伤）</td>
+        <td>易伤会放大它下一击；带净化或人工制品，别在易伤状态硬吃</td>
+      </tr>
+    </table>
+
+    <h3>第三层</h3>
+    <table>
+      <tr><th style="width:22%">精英</th><th style="width:40%">机制</th><th>破解</th></tr>
+      <tr>
+        <td class="k">巨头<br><span class="muted">Giant Head</span></td>
+        <td>给你上<span class="b">大量 debuff</span>，拖久了完全打不动</td>
+        <td>需要防御 + 净化；这是一场"输出够不够"的检测，不够就别进</td>
+      </tr>
+      <tr>
+        <td class="k">复仇女神<br><span class="muted">Nemesis</span></td>
+        <td>周期性进入<span class="b">无形（受伤变 1）</span>，并往牌堆塞诅咒</td>
+        <td><span class="k">它无形时别浪费输出</span>，那几回合用来铺 buff、抽牌、防御</td>
+      </tr>
+      <tr>
+        <td class="k">唤蛇者<br><span class="muted">Reptomancer</span></td>
+        <td>不断召唤蛇，加上本体输出，场面迅速失控</td>
+        <td>AOE 清召唤物，同时保证单体爆发能打本体</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2><span class="dot" style="background:#b3453c"></span>常见小怪要点</h2>
+    <table>
+      <tr><th style="width:16%">层</th><th style="width:30%">敌人</th><th>要点</th></tr>
+      <tr><td class="k" rowspan="3">第一层</td><td>颚虫 Jaw Worm</td><td>会给自己叠力量，别拖</td></tr>
+      <tr><td>邪教徒 Cultist</td><td><span class="b">第一回合必给自己叠力量</span>，之后输出暴涨 —— 优先秒掉</td></tr>
+      <tr><td>红/蓝 奴隶</td><td>会给你上虚弱 / 易伤，注意 debuff 叠出来的额外伤害</td></tr>
+      <tr><td class="k" rowspan="3">第二层</td><td>球状守卫 Spheric Guardian</td><td>开局巨额格挡，<span class="k">破不了格挡就是白打</span> —— 中毒无视格挡，或攒爆发一击</td></tr>
+      <tr><td>百夫长 + 神秘师</td><td><span class="k">先杀神秘师</span>，它会持续给百夫长加力量/护盾</td></tr>
+      <tr><td>鸟群 Byrd</td><td>多段攻击，格挡收益高，别裸奔</td></tr>
+      <tr><td class="k" rowspan="2">第三层</td><td>黑暗族 Darkling</td><td>成群出现，没 AOE 会被慢慢磨死</td></tr>
+      <tr><td>巨口? / 各类高血怪</td><td>第三层小怪血量高，看意图图标决定攻防，别按套路无脑打</td></tr>
+    </table>
+    <p class="muted">这里只列最有代表性的。遇到没见过的敌人，<span class="k">先花一轮看清它的意图循环</span>，比盲目输出重要得多。</p>
+  </div>
+</section>
+
+
+<!-- 决策清单 -->
+<section class="panel" id="p8">
+  <div class="card">
+    <h2><span class="dot" style="background:#2f7d4f"></span>商店：钱怎么花</h2>
+    <h3>优先级（从上到下）</h3>
+    <table>
+      <tr><th style="width:14%">顺序</th><th style="width:30%">买什么</th><th>说明</th></tr>
+      <tr><td class="g">1</td><td class="k">移除卡牌</td><td>几乎永远最优。<span class="k">越早删越便宜</span>（每次删完价格会涨），所以第一个商店就动手</td></tr>
+      <tr><td class="g">2</td><td class="k">核心牌</td><td>碎片整理、催化剂、极限突破、回响形态、Rushdown 这类"一套路就靠它"的牌，看到直接买</td></tr>
+      <tr><td class="w">3</td><td class="k">强力遗物</td><td>只在钱多的时候买。遗物会随精英怪掉落，不用抢</td></tr>
+      <tr><td class="w">4</td><td class="k">药水</td><td>只在<span class="k">打 Boss / 精英之前</span>买，且只买针对性的（回血、格挡、爆发）</td></tr>
+      <tr><td class="b">5</td><td>普通攻击/技能牌</td><td>基本不买。商店里"看起来不错"的牌，90% 都是让你卡组变胖的陷阱</td></tr>
+    </table>
+    <h3>金币管理</h3>
+    <ul>
+      <li><span class="k">至少留够一次删牌的钱</span>再考虑别的消费。</li>
+      <li>删牌服务不是每个商店都有 —— 有就优先用掉。</li>
+      <li>遗物"买得起但很贵"时问自己：这笔钱够不够删两张牌？删牌通常更值。</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2><span class="dot" style="background:#2f7d4f"></span>篝火：睡觉还是升级</h2>
+    <table>
+      <tr><th style="width:30%">情况</th><th>选择</th></tr>
+      <tr><td>血量低于安全线<br>（战士 50%，其他 60%）</td><td class="g">睡觉</td></tr>
+      <tr><td>血量健康，有核心牌没升级</td><td class="g">升级（只升核心牌）</td></tr>
+      <tr><td>血量健康，核心牌都升过了</td><td>升级第二常用的那张牌，或者睡觉攒血给下一场精英</td></tr>
+      <tr><td>Boss 前的最后一个篝火</td><td class="k">几乎总是升级（除非血量已经危险到打不过）</td></tr>
+      <tr><td>篝火有替代选项<br>（挖掘 / 冥想等）</td><td>血线安全时优先用替代选项换资源；血线危险就老实睡觉</td></tr>
+    </table>
+    <p class="muted">记住：升级只能给"你每局都会打很多次"的那张牌。升级一张一局只打一次的牌 = 白给。</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="dot" style="background:#2f7d4f"></span>宝箱与问号事件</h2>
+    <h3>宝箱</h3>
+    <ul>
+      <li>普通宝箱直接开 —— 免费遗物，没有任何理由不开。</li>
+      <li>宝箱有概率是<span class="w">陷阱（需要钥匙等特殊道具）</span>，拿不到就算了，不要为了它改路线。</li>
+    </ul>
+
+    <h3>问号事件的通用规则</h3>
+    <ul>
+      <li><span class="k">上层多走、下层少走</span> —— 第一层事件收益好，第三层事件大多是坑。</li>
+      <li>看到<span class="b">"支付生命换 X"</span>的选项：血量 &gt; 70% 才考虑，否则一律选保守项。</li>
+      <li>看到<span class="k">"遗物 vs 回血"</span>：血量安全拿遗物，血量危险拿回血。<span class="k">活着才有输出</span>。</li>
+      <li>遇到"金神像"类（拿了会触发陷阱掉血）：<span class="k">血量够就拿</span>，遗物价值远高于那点血。</li>
+      <li>不确定就选<span class="k">"离开 / 什么都不做"</span> —— 不亏就是赚，这游戏里"错过收益"远没有"踩坑掉血"致命。</li>
+    </ul>
+  </div>
+</section>
+
+
+<!-- 遗物分级 -->
+<section class="panel" id="p9">
+  <div class="card">
+    <h2><span class="dot" style="background:#7a5cc4"></span>通用遗物分级</h2>
+    <h3><span class="g">S 级 —— 见到就拿，几乎无脑强</span></h3>
+    <table>
+      <tr><th style="width:30%">遗物</th><th>为什么强</th></tr>
+      <tr><td class="k">冰淇淋 Ice Cream</td><td>没花完的能量留到下一回合，滚雪球神器</td></tr>
+      <tr><td class="k">符文金字塔</td><td>手牌回合结束不清空 —— 能攒牌做爆发，观者/机器人尤其强</td></tr>
+      <tr><td class="k">钢笔尖 Pen Nib</td><td>每打出 10 张攻击牌，下一张伤害翻倍</td></tr>
+      <tr><td class="k">鸟面瓮</td><td>每打一张技能牌回 1 血 —— 非战士角色的<span class="k">稳定回血来源</span></td></tr>
+      <tr><td class="k">地精角 Gremlin Horn</td><td>击杀敌人时获得能量并抽牌，战斗滚雪球</td></tr>
+      <tr><td class="k">血瓶 / 锚 / 号角</td><td>开局回血 / 开局格挡 / 第二回合大量格挡，稳定减伤</td></tr>
+      <tr><td class="k">苦无 / 手里剑 / 折扇</td><td>多段攻击叠敏捷或力量，多段流派的核心</td></tr>
+      <tr><td class="k">赌徒筹码 / 备战袋</td><td>起手手牌调整，避免开局卡手</td></tr>
+      <tr><td class="k">肉骨头 / 托里 / 魔法花</td><td>低血回血 / 小额伤害减免 / 回血效果强化</td></tr>
+    </table>
+
+    <h3><span class="w">A 级 —— 强，但要看套路</span></h3>
+    <ul>
+      <li><span class="k">红骷髅</span>（低血 +力量）—— 战士/敢卖血的角色神级</li>
+      <li><span class="k">符文立方体</span>（受伤抽牌）—— 配合自伤流</li>
+      <li><span class="k">青铜鳞片 / 自成型黏土</span> —— 反伤与挨打收益，配合高频率受击</li>
+      <li><span class="k">日晷 / 墨水瓶 / 沙漏</span> —— 过牌与循环类，卡组薄时收益大</li>
+      <li><span class="k">各类 +力量 / +敏捷 / +聚焦 的专属遗物</span> —— 对应角色一律拿</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2><span class="dot" style="background:#b3453c"></span>Boss 遗物：安全 / 有代价 / 别选</h2>
+    <table>
+      <tr><th style="width:18%">档位</th><th style="width:34%">遗物</th><th>说明</th></tr>
+      <tr>
+        <td class="g">安全</td>
+        <td class="k">空笼 Empty Cage</td>
+        <td><span class="g">直接移除 2 张牌，永远不亏</span> —— 拿不定主意就选它</td>
+      </tr>
+      <tr>
+        <td class="g">安全</td>
+        <td class="k">星盘 Astrolabe</td>
+        <td>转化 3 张牌（早期拿极强，能把打击全换掉）</td>
+      </tr>
+      <tr>
+        <td class="g">安全</td>
+        <td class="k">插入器 / 咖啡壶 / 奴隶项圈</td>
+        <td>机器人专属强力 / 战士可接受 / 精英战给能量</td>
+      </tr>
+      <tr>
+        <td class="w">有代价</td>
+        <td class="k">哲学家之石 / 诅咒钥匙 / 痛苦印记</td>
+        <td>给能量但伴随负面：敌人变强 / 开箱得诅咒 / 塞伤口。输出够强时可以接受</td>
+      </tr>
+      <tr>
+        <td class="w">有代价</td>
+        <td class="k">黑星 / 潘多拉魔盒</td>
+        <td>黑星要靠后续多打精英才回本；魔盒会把打击防御全转化，卡组已成型时是负收益</td>
+      </tr>
+      <tr>
+        <td class="b">别选</td>
+        <td class="k">符文穹顶 Runic Dome</td>
+        <td><span class="b">看不到敌人意图</span> —— 新手选它等于闭着眼睛打，绝对不要</td>
+      </tr>
+      <tr>
+        <td class="b">别选</td>
+        <td class="k">天鹅绒颈链</td>
+        <td>每回合限 6 张牌，废掉多段流 / 0 费流 / 连击流</td>
+      </tr>
+      <tr>
+        <td class="b">别选</td>
+        <td class="k">蛇眼 Snecko Eye</td>
+        <td>每回合多抽牌但费用随机 —— 方差极大，先精通游戏再考虑</td>
+      </tr>
+      <tr>
+        <td class="b">别选</td>
+        <td class="k">外质 / 素足 / 破碎王冠 / 熔炉锤</td>
+        <td>没有金币 / 没有药水 / 战利品变少 / 不能升级 —— 都是砍掉你一条腿</td>
+      </tr>
+    </table>
+    <p class="muted">规则很简单：<span class="k">Boss 遗物给的都是 +1 能量这种大收益，代价也同等巨大</span>。新手优先选"没有副作用"的那几个。</p>
+  </div>
+</section>
+
+
+<!-- 战士 -->
+<section class="panel" id="p1" data-page-node-id="iDoKbbFat47Ju62inFZDCV">
+  <div class="card" data-page-node-id="knWtseYDEuQTnaSniC4Xza">
+    <h2 data-page-node-id="dxLWe6ZOUm7tED8p3Irthd"><span class="dot" style="background:#b3453c" data-page-node-id="vw0GrLukZCxns1pPBEPyge"></span>战士 Ironclad</h2>
+    <blockquote data-page-node-id="20TK4ZpZ1IbDdKRxWZXfte"><p data-page-node-id="9IlCkNxQnzjml5FGO5fD6i">自带「燃烧之血」，<span class="k" data-page-node-id="kxDK6drcECWiPYT2Iw7prM">每场战斗结束回 6 血</span> —— 全游戏最高容错，可以放心用血换资源。</p></blockquote>
+
+    <h3 data-page-node-id="x6wnCXAqnPNnGB6EFfwlQy">三条路</h3>
+    <table data-page-node-id="jqSLsfElfpckttJ5DbxBL8">
+      <tr data-page-node-id="2FDayFtLH528HYDcNjh9Ft"><th style="width:20%" data-page-node-id="J0cqVgloywAp3NcL6KIWaM">套路</th><th style="width:40%" data-page-node-id="1s1Sq7nStML8umnE9bVjjA">核心</th><th data-page-node-id="UCq9FNuD49fEe4hupkh91L">难度</th></tr>
+      <tr data-page-node-id="S8dpjwAGsPf5S5nt6m0urJ"><td class="k" data-page-node-id="GpCRkT7yYTqmwL9UfXO01p">力量流 <span class="tag good" data-page-node-id="LEsuwz4hsy0I5QXB3E0zma">推荐</span></td><td data-page-node-id="jManzduWX89uDuXrGqxrFa">+力量牌（激怒/恶魔形态/极限突破）+ 重刃（力量加成×3）</td><td data-page-node-id="B0Tla9shpRmqCVzleoXw6j">低，最稳</td></tr>
+      <tr data-page-node-id="nWDiKQLtNk4jDGQgDnBkqB"><td class="k" data-page-node-id="5FaTZA6PzAxVUjBVTLagEm">格挡流</td><td data-page-node-id="TYuDOp45Smrl5iWeFTcK3A">壁垒（格挡不清空）+ 肉搏（伤害=格挡）</td><td data-page-node-id="3oUMUUAxnwtMJx0BMi8W1c">中</td></tr>
+      <tr data-page-node-id="hAwnAWz8cTdezPY7L1RRMd"><td class="k" data-page-node-id="LyN9AdVOpT913iu0DJJrQZ">消耗流</td><td data-page-node-id="4Gmdey8nDh1T9yUQu9UqgD">腐化（技能 0 费且消耗）+ 无痛/黑暗拥抱</td><td data-page-node-id="IJDMSqyIrvjIk6ROoX937U">高，上限最高</td></tr>
+    </table>
+
+    <h3 data-page-node-id="isLmy1kf7ICayD2YBVCfgQ">拿牌</h3>
+    <div class="grid" data-page-node-id="Gy70HXEUTIAieK5Dw4BruT">
+      <div class="box" data-page-node-id="RCV6jqI9DfTEm2f25LAtOU"><div class="t g" data-page-node-id="UUgcZS1wyRvUHyfKmwsCfF">必拿</div>
+        <ul data-page-node-id="aqo8ik2uOF0aGGrpHv5eGF">
+          <li data-page-node-id="DrozeFCcaMWUY0sRW68oCk">猛击 Bash（起手自带，<span class="k" data-page-node-id="9tc1gDrngpMXkcq9LJyBuZ">全程最该升级</span>）</li>
+          <li data-page-node-id="H0XOvpQ6kVyQEJstP4X2Ah">激怒 / 恶魔形态 / 弱点侦查</li>
+          <li data-page-node-id="l1159cvd0t0KEyGv7vGwLt">极限突破（力量翻倍，胜利开关）</li>
+          <li data-page-node-id="JIVznvkBLQGnqZaRHNX3GT">重刃（力量流输出终端）</li>
+          <li data-page-node-id="3FLQcOQyGOEVGtznDzq8Qc">不以为意（8 格挡 + 抽 1）</li>
+          <li data-page-node-id="JZHk3pQef49SthaE0Lj3kT">痛击无视（巨量格挡，救命）</li>
+          <li data-page-node-id="0xuRZY5Cr5mCPDEDaliKWE">旋风斩（AOE + 配力量）</li>
+          <li data-page-node-id="9nBkE4NGiCpqHakVcFOTEA">收割者（伤害回血）</li>
+          <li data-page-node-id="dX6n2Ynyab6jj1Y4AmDqOh">腐化（看到就拿）</li>
+        </ul>
+      </div>
+      <div class="box" data-page-node-id="tFNJL02Yn3aBEfmEouek4o"><div class="t b" data-page-node-id="EIwj5oqpN40lAi0QASAmpE">陷阱，别拿</div>
+        <ul data-page-node-id="YctzmgF6r0oCazSRAH3HCo">
+          <li data-page-node-id="HeEYL5SSXeIFfsGwzM8HZt">完美打击（需要一堆打击，反精简）</li>
+          <li data-page-node-id="m3AJ1yBTVXr1YPPyTx29b6">Clash（手上有技能牌就打不出）</li>
+          <li data-page-node-id="E0DkZjVP7BvVhbxcGipdV4">狂暴 Rampage（需要循环）</li>
+          <li data-page-node-id="m4ui35aZgcJ961oSqOoIXh">灼热打击（吃光篝火资源）</li>
+          <li data-page-node-id="SJH2XDMBvwVyFA2whzrI5F">所有 3 费大牌（巨力挥舞等）</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 data-page-node-id="vabH87yvajcJpqbcM3R1v3">删牌 / 篝火</h3>
+    <ul data-page-node-id="A1vnJl4kiFD1q47cXff1CT">
+      <li data-page-node-id="luskFb8kC0qbIx44snIhbm">商店前三次花钱<span class="k" data-page-node-id="UKKEaNMkvUBC4wqbGWQm2D">全删打击</span>，最后才动防御。</li>
+      <li data-page-node-id="YdT31HlvkmQ2tIWrIQj0AM">篝火：血 &lt; 50% 睡觉，否则升级。升级顺序：<span class="k" data-page-node-id="j63TaGgzeAZ59fJR4Gqmfv">猛击 → 重刃 → 旋风斩 / 不以为意</span>。</li>
+    </ul>
+
+    <h3 data-page-node-id="92aw5DqI0up94SFJ3OUeaw">遗物</h3>
+    <p data-page-node-id="4qdB23U0EeFjCsxrdjQBvI"><span class="g" data-page-node-id="zrUDpSyOTovR1W9Ub4tlDF">强：</span>血瓶、鸟面瓮（打技能回血）、钢笔尖、苦无/手里剑/折扇（配旋风斩）、符文立方体（受伤抽牌）、红骷髅（血低 +力量）、肉骨头。</p>
+    <p data-page-node-id="fwHFD5P1fjIGHiCinui40N"><span class="w" data-page-node-id="f7XLCmc6pTziiToXIKAXAL">Boss 遗物：</span>咖啡壶（+1 费不睡觉）<span class="g" data-page-node-id="A8ZlLYhwhOqaYU9s5y5wEu">对战士友好</span>；天鹅绒颈链 <span class="b" data-page-node-id="VNQnnEqhfHcLrrR5nCWo3o">别选</span>（废掉多段流）；痛苦印记（+1 费但拿诅咒）战士能消化，可拿。</p>
+
+    <h3 data-page-node-id="RmEA5w4LHJwOo7EEbyYSnw">三层节奏</h3>
+    <ul data-page-node-id="vfnqnA7MCeYYQy0OE3urou">
+      <li data-page-node-id="vqUWPKtUN3Kw9ztoJxXPx1"><span class="k" data-page-node-id="C44NEwCF5fRlurCrRDfS6H">一层</span>：补 3-4 张高质量攻击牌，打满 2 个精英。</li>
+      <li data-page-node-id="CsuqcxWukjKmIbqgHsP0Bs"><span class="k" data-page-node-id="MXXvBfQBilpVxoJD134lL6">二层</span>：必须备 AOE，套路定型。</li>
+      <li data-page-node-id="PRDz52NRWX1ROzpXZdgSc6"><span class="k" data-page-node-id="3SBJyRKGevfR0JkCwZZCy1">三层</span>：补防御与稳定性，只有输出会被拖死。</li>
+    </ul>
+    <p class="muted" data-page-node-id="ElYUYpFxGdPfTg756iPWr1">一句话：删光打击 → 堆力量 → 猛击上易伤 → 重刃收人头。</p>
+  </div>
+</section>
+
+<!-- 猎手 -->
+<section class="panel" id="p2" data-page-node-id="zbohWPFo27c0X9MpupITbs">
+  <div class="card" data-page-node-id="RV5wkFgRs9AqRF6N0e9wnX">
+    <h2 data-page-node-id="62tDXJksKFum5gQrRwIvON"><span class="dot" style="background:#2f7d4f" data-page-node-id="tv6pg7yH6c9AWCo0NztRRW"></span>静默猎手 The Silent</h2>
+    <blockquote data-page-node-id="P5RZdvyaxDMTNA9UGXVM9L"><p data-page-node-id="TuOMtVQTMuhrqotYajHnN1"><span class="b" data-page-node-id="PXepqisqBxCHtI0OM2cyCH">没有自带回血。</span>血量是纯消耗品 —— 这是新手打猎手死得比战士快得多的头号原因。起手 12 张牌，<span class="k" data-page-node-id="6bpzvZbCCFUmLmCqEmOR7c">起手输出比战士还弱</span>，但过牌能力全游戏最强。</p></blockquote>
+
+    <h3 data-page-node-id="TxbnyZ75Ols83MbbdYk1VM">三条路</h3>
+    <table data-page-node-id="9ELBAqyM8x2AmOddfT2tbm">
+      <tr data-page-node-id="9FZokZp7mJaN6Qh5E6t2h6"><th style="width:20%" data-page-node-id="KTsAjwD1QNyNlKy56qAii1">套路</th><th style="width:45%" data-page-node-id="baSLdIxpSKnVfaDbtBBisi">核心</th><th data-page-node-id="Lxc3m4oV3zf4YPJLdW8VFN">备注</th></tr>
+      <tr data-page-node-id="nWLjzikqRaETbMz7lgICzM"><td class="k" data-page-node-id="luZaTUYqwBq3Tu0vmNTruk">中毒流 <span class="tag good" data-page-node-id="UsX4Zy7qnpb0wHB0Evs4lu">推荐</span></td><td data-page-node-id="rC9rTRsc41GLVDDG7RGzeS">剧毒烟雾（每回合全体叠毒）+ 催化剂（毒翻倍）+ 尸爆术</td><td data-page-node-id="aoFw6TugWDELZ2YAc59Hdn">稳定省心，Boss 也吃毒</td></tr>
+      <tr data-page-node-id="1IesRjl91rjlZWbgPYsR9F"><td class="k" data-page-node-id="Bmnua510zF15aqadhis2Pc">弃牌流</td><td data-page-node-id="1Exo52B9PmzDOYSS48TxlL">杂技 / 精算赌博（过牌）+ 开膛 / 潜袭（弃牌减费）</td><td data-page-node-id="O2fbVxcBKGM4ZZWa1ev1j1">上限高，吃牌序感</td></tr>
+      <tr data-page-node-id="7Xf1BCWGejRXM4pF2qC0P8"><td class="k" data-page-node-id="8DE4yyhF8XBrE6URXwiVfd">防御流</td><td data-page-node-id="xd42swVplusPV2qmrHyzQ7">步法（+敏捷）+ 残像 + 幽魂形态 / 尖啸 / 铁蒺藜</td><td data-page-node-id="RfVG2bzpPcPxuj4KsERCMn">慢，但极稳</td></tr>
+    </table>
+    <p class="muted" data-page-node-id="dANuLesUKPQzVX8iGgle9G">中毒伤害无视敌人格挡，上完毒专心防御，正好掩盖猎手血少的短板。</p>
+
+    <h3 data-page-node-id="mCAWVQcAj1mOxQYSNDi9AF">拿牌</h3>
+    <div class="grid" data-page-node-id="CWFmWw3ojhefX2UzCVXRua">
+      <div class="box" data-page-node-id="mOiK2elnJuPMMTY2fx0ZDB"><div class="t g" data-page-node-id="dLqgltzjHGhXc9Iy1Nh8Cl">必拿</div>
+        <ul data-page-node-id="znVlUr9TYajB1KifPGlQmJ">
+          <li data-page-node-id="vEqlwDrTzvnPIUx5lSTj7q">剧毒烟雾（<span class="k" data-page-node-id="acb6Tty3CNfXqGRFlVxkNc">第一优先升级</span>）</li>
+          <li data-page-node-id="uHKZQ5pIDSXvX2eGGFWjTV">催化剂（毒层数翻倍）</li>
+          <li data-page-node-id="LnFTlGDkBItHPz0HyNB1Zz">尸爆术（二层清群神卡）</li>
+          <li data-page-node-id="amRoySVkuqJYpDC3DOxqLz">淬毒之刃 / 致命毒药</li>
+          <li data-page-node-id="iW77GHWbndAgGkk8fFGzwu">冲刺（打伤 + 格挡，一层性价比最高）</li>
+          <li data-page-node-id="u4QQvYieLl6Nl7fpyonUX4">杂技 / 精算赌博（过牌是命脉）</li>
+          <li data-page-node-id="rX6c9LfzcWgA8NUS1lpmO1">横扫（格挡 + 虚弱）</li>
+          <li data-page-node-id="W1N23cD2mdoNiVKVK0NE4o">尖啸（本回合大幅削弱全体）</li>
+          <li data-page-node-id="d4BUcWqNl4BgBxOcRmz5q3">幽魂形态（无形，Boss 保险栓）</li>
+        </ul>
+      </div>
+      <div class="box" data-page-node-id="DeLtwVCuV6isTDTN1e2yGB"><div class="t b" data-page-node-id="4uxSsBHE42GDCJjJHEupE6">陷阱，别拿</div>
+        <ul data-page-node-id="bgLRdOkUpPW0GGAGpeu3l8">
+          <li data-page-node-id="JWFShapFc7hojFtr62yJ6L">大结局（需整套卡组围绕它）</li>
+          <li data-page-node-id="reJLvMfj0WwZT1rNvFDHyA">千刃（要好牌循环才起效）</li>
+          <li data-page-node-id="10l2U4GXrGqVLcdSb4C7AC">大量 3 费大牌</li>
+          <li data-page-node-id="pUpjhQrUaGkbvSm72i8v9X">任何"需要配合"但你没配合的牌</li>
+        </ul>
+      </div>
+    </div>
+    <p data-page-node-id="HjCayKgFUImVR1pYV4uxE5"><span class="tag warn" data-page-node-id="LULIx4FUrXzsa8lxu2vOm9">看情况</span>步法、残像、闪避翻滚、模糊、掠食者、玻璃刀、死吧死吧死吧（二层必留一张 AOE）。</p>
+
+    <h3 data-page-node-id="OOiy5iJFypk7BTgEci62rs">删牌 / 篝火（跟战士不一样）</h3>
+    <ul data-page-node-id="2sWNDAstSLUhXLGyBtBvE4">
+      <li data-page-node-id="tCyCYFgcbCNoxBXupuPBK0"><span class="k" data-page-node-id="cX78YzOfvIooYkt75Rk7GE">第一层别急着删光打击</span> —— 猎手起手输出太弱，先拿 2-3 张攻击牌（冲刺、淬毒之刃）<span class="k" data-page-node-id="TQ6q1YRtBMjdQN9wdOcuh9">再删</span>。</li>
+      <li data-page-node-id="o7wIkkBdc2WwgDZA6nZVkJ">篝火：血 &lt; 60% 睡觉（比战士保守）。升级顺序：<span class="k" data-page-node-id="8Ry512MOrVYYlc8erV0IYh">剧毒烟雾 → 中和 → 冲刺 → 催化剂</span>。</li>
+    </ul>
+
+    <h3 data-page-node-id="yriYyJOZDXbJBKZj8I2oaz">遗物</h3>
+    <p data-page-node-id="yadCKLbbkNJmgSYHbedKIU"><span class="g" data-page-node-id="ZVcfK7KfyhDlb1byA9ey38">强：</span>苦无 / 手里剑 / 折扇（多段攻击多）、鸟面瓮（<span class="k" data-page-node-id="sBZANcnc0DmKMg1ngGg1qh">唯一稳定回血来源之一</span>）、冰淇淋、符文金字塔、坚韧绷带 / 手镯类（弃牌流）、赌徒筹码。</p>
+    <p data-page-node-id="4AqckL23uOP9pO5pYDrUyz"><span class="b" data-page-node-id="tYFNklE79SUZng9q7UVaxM">坑：</span>咖啡壶（不能睡觉）<span class="b" data-page-node-id="OBgEy07VImYXrE2TnMAMWI">尽量别选</span>；天鹅绒颈链废掉弃牌流；蛇眼新手先别碰。</p>
+
+    <h3 data-page-node-id="klNkzY0lKRnAVyi2UUNmhC">三层节奏</h3>
+    <ul data-page-node-id="YNT9pFLDtbROzJfDke2ng2">
+      <li data-page-node-id="wZlGqRehpufK7jEyJv2RkR"><span class="k" data-page-node-id="V2Rh1QsbVQwr0A6GUj0Lxe">一层（最难）</span>：先补输出，能打 1-2 个精英就好，别贪。</li>
+      <li data-page-node-id="eF3NmAxnp7EcMi24nLzYRN"><span class="k" data-page-node-id="f53jF1Xbk8QNw2koBHMsSw">二层</span>：中毒流发力，必须有 AOE。</li>
+      <li data-page-node-id="bwWJshfE4mH2GtB8DlnPyn"><span class="k" data-page-node-id="iLTM5MbriRDXdeVu01Yjgj">三层</span>：补防御，猎手后期不缺伤害，缺的是活下来。</li>
+    </ul>
+    <p class="muted" data-page-node-id="1DMcUuDUgtepW2QzLiKx2Z">贯穿全程：猎手只够撑 2-3 次失误，<span class="k" data-page-node-id="XG9Ac4lHBxrxVBL2WtYtpT">不确定就防御</span>。战士可以莽，猎手不行。</p>
+  </div>
+</section>
+
+<!-- 机器人 -->
+<section class="panel" id="p3" data-page-node-id="wiQZF1HqxkuE6VctRvCG9Z">
+  <div class="card" data-page-node-id="neewCfnTBAsOQrIVcBAqsV">
+    <h2 data-page-node-id="g7tTDXwzGuT3BApUuZ6My1"><span class="dot" style="background:#2f6fb5" data-page-node-id="2HZJkHzL5BiRUwlAWJOE0i"></span>机器人 Defect</h2>
+    <blockquote data-page-node-id="5YSk7ilquoGdJFBbT9jvxa"><p data-page-node-id="AGqlZqkrgzwsCOYHW27uwF">开局遗物：<span class="k" data-page-node-id="oKb2QV1qLHM8IAVf4MSa3S">战斗开始时自动引导 1 个闪电球</span>。理解门槛最高，成型后最省心。</p></blockquote>
+
+    <h3 data-page-node-id="mIiMp85sfqou3gzuR5nYp0">「球」机制 —— 必须先懂</h3>
+    <table data-page-node-id="dEAPkg9hBTU1GJIG35rlkZ">
+      <tr data-page-node-id="HZKW1jLdfmswzXa9M1XyOh"><th style="width:24%" data-page-node-id="ve5pyEzN7HhTaDUJTBwNNk">球</th><th data-page-node-id="e4LNb9grEmshEJ1vCDwAJt">作用</th></tr>
+      <tr data-page-node-id="fAYgftjEkItWN6pi1nc4ql"><td class="k" data-page-node-id="lgQ8u07DJoXCfnd5waUGJM">闪电球</td><td data-page-node-id="CqBtL5RncnF8tNfrpCb2PZ">激发时打随机敌人 → 输出</td></tr>
+      <tr data-page-node-id="LXUhzrLKMdGrpLMMqmzaNa"><td class="k" data-page-node-id="Nv5fsJMfZMWMSwVrEPeaQn">冰霜球</td><td data-page-node-id="l5QxgZA0x7x1yxG3LeqWaj">激发时给格挡 → <span class="k" data-page-node-id="3K8LNHxPS3EEw3VlBYufLB">机器人主要防御手段</span></td></tr>
+      <tr data-page-node-id="cegNTzV6cViGCT7Rk6CAeC"><td class="k" data-page-node-id="GUB8igBM2cQqDmoxsf4Gd1">黑暗球</td><td data-page-node-id="KZkVvlRyGRfxAVd03UODGa">自己累积伤害，激发时一次性爆发 → 后期核弹</td></tr>
+      <tr data-page-node-id="e9FmN87W6ZUvYeX7MhgVW5"><td class="k" data-page-node-id="xggF5sLKIHimHjdyiw4YFT">等离子球</td><td data-page-node-id="nxRa2EBYTVrdVlOyyFQnDX">激发时给能量 → 费用引擎</td></tr>
+    </table>
+    <ul data-page-node-id="eNFGr3zc5BJZOIfvNqDdTF">
+      <li data-page-node-id="EMCJwRb0BEVJbhXkyOl4Ai"><span class="k" data-page-node-id="zgpOMSGqFGzzhnxSKUQY3N">球位默认 3 个</span>。引导新球时<span class="k" data-page-node-id="0iOOdzP1p1MOSJj4c4NDbi">最老的球被挤出去并自动激发</span> —— "用新球把冰霜球挤出来换格挡"是核心高级技巧。</li>
+      <li data-page-node-id="OKoYuTM3tkFsWCW2Xh0KxD"><span class="k" data-page-node-id="ldeoytbldgPcGDDSJQFPwk">聚焦（Focus）让所有球数值变强</span>，是最重要的属性。碎片整理（+聚焦）与电容器（+球位）是两根支柱。</li>
+      <li data-page-node-id="lTwdSxkTYyOypSZJfP7rJb">冰霜球被挤出去 = 免费格挡，所以机器人不太需要防御牌。</li>
+    </ul>
+
+    <h3 data-page-node-id="prMTVIvUFVwYLBm3SpVBDd">四条路</h3>
+    <table data-page-node-id="H9vyrSRJuiAhbgLfCQZkN1">
+      <tr data-page-node-id="qtoDUHIfBc98ccDDx0HHwo"><th style="width:26%" data-page-node-id="4YnphWCsASkMGWnR8MubT3">套路</th><th data-page-node-id="xgKMQ2tx1RJI5h8r0oz1dS">核心</th></tr>
+      <tr data-page-node-id="9AmfIFj0BCtJWecNLjO7Xk"><td class="k" data-page-node-id="I1nMlHy24FfKl8PzaWUi3J">冰霜防御流 <span class="tag good" data-page-node-id="JVPrf5U0ODAHTRV0AfRNWM">推荐</span></td><td data-page-node-id="TCxcCDtZG2tiABP6oLqEK8">冰川（2 冰霜 + 格挡）+ 碎片整理 + 电容器，站得住慢慢磨</td></tr>
+      <tr data-page-node-id="GpoKOELjLrA5n5gsGUB0CU"><td class="k" data-page-node-id="nF0oEGFUB1GXXJJCG643o5">闪电爆发流</td><td data-page-node-id="m7xPCDelMKjVCCEJgTXdon">电动力学（闪电打全体）+ 球状闪电 + 聚焦，二层清群效率第一</td></tr>
+      <tr data-page-node-id="iHaB0UwkNaUtdVWt2DYVPF"><td class="k" data-page-node-id="qeInfKr7At4HpmNgjopTDy">0 费流</td><td data-page-node-id="F5ut43QguS27HvLGwZSK9p">爪击 + 合众为一（0 费攻击收回手牌），一回合打十几张</td></tr>
+      <tr data-page-node-id="t6caILMHnMtxj4lbLbZchi"><td class="k" data-page-node-id="ayOFB8zHsEZwk5OJqWqAVm">回响形态流</td><td data-page-node-id="JKO6UmrE6uA9m5X60UI8nX">每回合第一张牌打两次，上限最高，但要薄卡组</td></tr>
+    </table>
+
+    <h3 data-page-node-id="YEsD9TyxyVCKjlC394Ut54">拿牌</h3>
+    <div class="grid" data-page-node-id="d8aNBKzmBKeircEihfjQgf">
+      <div class="box" data-page-node-id="eF7mPwD8SkADnbApBnFbbZ"><div class="t g" data-page-node-id="HJNXqUAIB6IDmn5njknzQl">必拿</div>
+        <ul data-page-node-id="hDsOP2l0nGaPE9Gr9cLlCl">
+          <li data-page-node-id="6niCaNwLh608K8lIurZZr5"><span class="k" data-page-node-id="noKL2BSvA4J6o6XRnoHfC0">自我修复（战斗结束回血，机器人的命根子）</span></li>
+          <li data-page-node-id="HUXwJEDwi5LZWwADagghHp">碎片整理（+聚焦，<span class="k" data-page-node-id="KngGnp99YuFFvAtLPtR1vg">第一优先升级</span>）</li>
+          <li data-page-node-id="2GEUZyF8iuRyhDQr8CsIT5">电容器（+球位，质变）</li>
+          <li data-page-node-id="DXhV8XWyhan08V5kJpuhGj">冰川（格挡 + 2 冰霜）</li>
+          <li data-page-node-id="TXWfqBQBzHpreEm6bDwr9m">电动力学（二层必备 AOE）</li>
+          <li data-page-node-id="nrQqqwVjOCYt6DixCGyiIx">球状闪电 / 寒流</li>
+          <li data-page-node-id="E1G8YwrCnfNG6eZwFg0ITV">回响形态（见到就拿）</li>
+          <li data-page-node-id="rIJRIFIpa0wCZJp3FsOfHH">递归（重新激发并回填一个球）</li>
+        </ul>
+      </div>
+      <div class="box" data-page-node-id="dihuz6KZuqRhoBJcccg3Uv"><div class="t w" data-page-node-id="EVk5dmSHQqkScF6AyAjZOo">强，看情况 / 别乱拿</div>
+        <ul data-page-node-id="dKOAKtwfY0UOD7tcMyWyP7">
+          <li data-page-node-id="4UBdzTOVrBiX8qIXBh7WlB">偏见认知（聚焦暴涨但每回合掉 1 聚焦，需人工制品或橙色药丸抵消）</li>
+          <li data-page-node-id="vbCSa5fhi0k14dd5E7uELL">核心冲击（打伤 + 人工制品）</li>
+          <li data-page-node-id="9vSEcxeAdSvO78ZJqrUau1">蒸汽屏障 / 自动护盾 / 缓冲 / 力场</li>
+          <li data-page-node-id="b2n3Wakn2ifGEG3uY4wA0b">分离（一次激发所有球换牌和能量）</li>
+          <li class="b" data-page-node-id="fRPasnDMkOm9KC4S7JJ0Q0">陨石打击等 5 费大牌（没费用引擎就卡手）</li>
+          <li class="b" data-page-node-id="hiWwBKshtOkoB6GsJMbZtQ">混沌、彩虹（随机引导球）</li>
+          <li class="b" data-page-node-id="UcrNazwl2dhkDvhYmTYCsB">创意 AI（污染卡组，跟精简死磕）</li>
+          <li class="b" data-page-node-id="ccwvfZJpW5pdBBnhb7jm23">只拿 1 张爪击（要么不玩，要么 3 张以上）</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 data-page-node-id="nyftyPy14lnVNuqvO3AGU5">为什么机器人最需要精简</h3>
+    <p data-page-node-id="PsvjSSIpG4Xg8v14KVjeKX">它比任何角色都依赖那几张关键牌（碎片整理、电容器、回响形态）。<span class="k" data-page-node-id="DbB3EAR3xVslHZpzgGCsSq">卡组厚 = 抽不到关键牌 = 球全是弱鸡</span>。目标 <span class="k" data-page-node-id="03w8vwAYAFnoP1A9ciDH6t">15-20 张</span>。先删打击（机器人的打击完全没用），防御可留几张。篝火顺序：<span class="k" data-page-node-id="JC9l3VQYtG9WZzKATTrOJH">碎片整理 → 冰川 → 自我修复 → 递归</span>。血 &lt; 60% 睡觉。</p>
+
+    <h3 data-page-node-id="l18EXZan0dRHAwA4H1QyHz">遗物</h3>
+    <p data-page-node-id="Ni4eGxHjGLIHD0GS1EFXDg"><span class="g" data-page-node-id="DNMF8hmyRe98R8r7zSZoEV">强：</span>符文金字塔（0 费流/回响流极强）、冰淇淋、所有加球位/加聚焦的专属遗物、鸟面瓮、插入器（每两回合自动引导一个球，<span class="k" data-page-node-id="LwGQjKam0yqNOALJsiNaDF">专属强力 Boss 遗物</span>）。</p>
+    <p data-page-node-id="SkZG9rfomLRiP7TaUedILW"><span class="b" data-page-node-id="RCaFChAurg3M2MxS59ozGp">坑：</span>天鹅绒颈链 <span class="b" data-page-node-id="PqU7UxLBATJCn6gzmbjKcj">千万别选</span>（废掉 0 费流与回响流）；蛇眼打乱高费关键牌；咖啡壶有自我修复时可接受。</p>
+
+    <h3 data-page-node-id="fAO4MVBZaG5X2EKoldbxmR">三层节奏</h3>
+    <ul data-page-node-id="zswuoFuOYbIoYNRTIFoQn4">
+      <li data-page-node-id="hNyvXsFCYo4GIc5VtAwnPD"><span class="k" data-page-node-id="M0w8raScXOvZE2bLjzzv7k">一层</span>：起手很弱（电击只有 3 伤），先补 2-3 张攻击牌再打精英。</li>
+      <li data-page-node-id="bivxU9Aps9EGCl7885RNxp"><span class="k" data-page-node-id="06fIG6JQVg4FaDIOrqQdic">二层</span>：拿到电动力学就起飞，同时补齐冰霜体系。</li>
+      <li data-page-node-id="SHaRDBQqScBSWvSNMHQCp3"><span class="k" data-page-node-id="u0zQctbeBHcdCdYKroN75Q">三层</span>：4-5 个冰霜球每回合自动十几格挡，稳如老狗；再考虑黑暗球/回响爆发。</li>
+    </ul>
+    <p class="muted" data-page-node-id="nPRaxIS32HrDUG2EONSUOh">一句话：堆聚焦 → 铺满冰霜站住 → 用新球挤出旧球当输出/格挡 → 回响形态收尾。</p>
+  </div>
+</section>
+
+<!-- 观者 -->
+<section class="panel" id="p4" data-page-node-id="eHdrJK5nxb6KbnJJYTjXIK">
+  <div class="card" data-page-node-id="GUHOgxYBI1PpgFheANcSTT">
+    <h2 data-page-node-id="ijQSBh4Dd9AhiuMHv3sRzF"><span class="dot" style="background:#b4762a" data-page-node-id="u6DBFDFHoXyjKqrTZzE1zN"></span>观者 Watcher</h2>
+    <blockquote data-page-node-id="nLUeURc80mp0lta8uWWVEW"><p data-page-node-id="b9v8cCkZp38tlWiDnCSPsb">上限天花板，也是最易玩崩的角色。<span class="b" data-page-node-id="IaIFZdU9DhMlSMIdc7AaAa">双刃剑全游戏最锋利</span>。起手仅 4 打击 4 防御，是四人中最精简的。</p></blockquote>
+
+    <h3 data-page-node-id="GWGGJM38KIByoKvOVgm5Wt">姿态机制</h3>
+    <table data-page-node-id="xnJEniSWRvZXCXPbhLwnHu">
+      <tr data-page-node-id="3VCsSJ4afmNGWKfw2iaDkK"><th style="width:22%" data-page-node-id="fstGHkjeZlqCezP70xy3MW">姿态</th><th data-page-node-id="kf3Lys18du8A2tZXWdKvyK">效果</th><th style="width:34%" data-page-node-id="iuRK7mhhwFf1zBtWIVjMjm">关键</th></tr>
+      <tr data-page-node-id="tZA1vndBwfHyCFBcad3Ibz"><td class="k" data-page-node-id="1mvWsKAoNCFQqHjcgmLxww">平静 Calm</td><td data-page-node-id="zHuXFDDGOcdDRQocbCKtbM">本身无效果</td><td class="g" data-page-node-id="g9ct9IM9OQQUdalnGwtWD0">退出平静时获得 2 能量 —— 永动机</td></tr>
+      <tr data-page-node-id="oBF3pEHtMCnJaRKAzV97xA"><td class="k" data-page-node-id="xT6BHG7GlFctmGq1RdsL3U">愤怒 Wrath</td><td data-page-node-id="c7tien09cmPZSz5vs1t6lg">造成伤害 ×2</td><td class="b" data-page-node-id="shqRk4ra9OEKN9FpJgIueO">受到伤害也 ×2</td></tr>
+      <tr data-page-node-id="gmhhfj790RcmSgaDcHCrzw"><td class="k" data-page-node-id="DOAkfLcoT00XEA946M0WHE">神格 Divinity</td><td data-page-node-id="wrELRTWeqiSb4Q9AvdxAMl">伤害 ×3</td><td data-page-node-id="9TbjwZ9dHMH9Gc4hUchBb6">靠真言攒够层数进入，后期核弹</td></tr>
+    </table>
+    <blockquote data-page-node-id="7usZyNVbAjzsiJRVtDbZdu"><p data-page-node-id="eGUkmqNpoE6qrfoP1tGDQy">核心循环：<span class="k" data-page-node-id="QXTHbOzzRmvUy3PRZj5LqG">警觉（进平静）→ 下回合爆发（进愤怒，回 2 能量）→ 双倍伤害 → 再回平静</span>。<br data-page-node-id="fZokP3RAYhKqrzHoIHoRCW">注意是"<span class="k" data-page-node-id="DGAHE8Cq1DmVKFZwNDuE5a">退出</span>平静"才给能量，反过来什么都没有。两张牌都升级（费用降为 1）后，这个循环<span class="g" data-page-node-id="HnCxBzSmHPRTo3buZCGSlG">完全免费</span>。</p></blockquote>
+
+    <h3 data-page-node-id="68ZCAk5IIhv8AwP9kGdlYM">愤怒是双刃剑（最容易死在这里）</h3>
+    <ul data-page-node-id="E0Hy89dA8p04DXi2ex9zdk">
+      <li data-page-node-id="CngxKeEEjZDDYwqjyzk96M">进愤怒前先看敌人意图：<span class="b" data-page-node-id="il3m7c0FxfcugQnQXmqdCd">它打 15，愤怒下就是 30</span>。要么秒它，要么先铺格挡。</li>
+      <li data-page-node-id="zMdgZYmvFtlxmbSlEzqjhK"><span class="k" data-page-node-id="Rv7ORqqLulDS9jOnEinhIc">别在打不死敌人的时候留在愤怒里结束回合</span>，切回平静没惩罚（只是少拿 2 能量）。</li>
+      <li data-page-node-id="akdfWexmkCN2rcwSLHRG8M">「空拳 / 空身 / 空心」这类退出姿态的牌是救命绳，身上至少留一张。</li>
+    </ul>
+
+    <h3 data-page-node-id="eHQJ3O1PgEcCSS8ELX3cC3">拿牌</h3>
+    <div class="grid" data-page-node-id="iRch9khQgtQNqYQCNCxmLz">
+      <div class="box" data-page-node-id="qKsvV19uPMckswpPpohZje"><div class="t g" data-page-node-id="TnVZknmNUsDzO4yZBO8lK1">必拿</div>
+        <ul data-page-node-id="MKEvUwJLFkORiyDpPUI6FS">
+          <li data-page-node-id="VRm6poHQrcFcD1xqZpCMjg">Rushdown（进愤怒抽 2 张，引擎核心）</li>
+          <li data-page-node-id="HhQHylCCHIjJ3yZ56SZLhG">连击 Flurry of Blows（0 费，<span class="k" data-page-node-id="agGaK1vKxUNQm4MiTCMx9o">每次切姿态从弃牌堆回手</span>）</li>
+          <li data-page-node-id="ZBgSLEjCCJ7x8kS762aZFX">心灵堡垒（切姿态获得格挡，唯一持续防御）</li>
+          <li data-page-node-id="0H5SG9J4KNaCVDWdZkKPuA">空拳 / 空身 / 空心（退出姿态）</li>
+          <li data-page-node-id="wEXRKuxpPVR0RTJ4q7KUv2">无畏（敌人是攻击意图则进平静）</li>
+          <li data-page-node-id="NtkqrAtdZ8w203SVAMO4Ks">攀手（攻击时获得格挡）</li>
+          <li data-page-node-id="Vr958mtgFEwqbI49004KHk">多段攻击牌（愤怒下收益翻倍）</li>
+          <li data-page-node-id="P7qEapjroHZ5Cy91JQGS0h">Vault（直接多一个回合）</li>
+        </ul>
+      </div>
+      <div class="box" data-page-node-id="IbPjDc6PXRMbKmyZfcLLLt"><div class="t b" data-page-node-id="dbxLjfvADRpXlwHJYcdWV3">新手别碰</div>
+        <ul data-page-node-id="YytnDTCCg4dRr6vHbIqjbk">
+          <li data-page-node-id="BuPfT9An7T33PlPzL8e979">整套真言/神格流（成型太慢，三层前基本空过）</li>
+          <li data-page-node-id="hJDTXBnw8leLNESdOm8Juc">欧米茄（慢到离谱，纯娱乐）</li>
+          <li data-page-node-id="Q1cwADfFrgnAOSkAWCFFGx">保留类大牌（Windmill Strike、Perseverance 占手牌）</li>
+          <li class="w" data-page-node-id="77hiqSnDWb2mOLz5dXUoxL">弑神 Blasphemy（下回合你会死，只在能这回合结束战斗时用）</li>
+        </ul>
+      </div>
+    </div>
+    <p data-page-node-id="Hyc4MjGDBKAkxqZBCR4A8E"><span class="tag warn" data-page-node-id="npcznSIqmXpllBg7cY72bx">吃操作</span>暴怒 Tantrum（进愤怒并把一张自己洗进弃牌堆，无限流关键）、内在平静、真言积累牌。</p>
+
+    <h3 data-page-node-id="Ab8RYDbFVip25nab3LqP0U">卡组要薄到变态</h3>
+    <p data-page-node-id="h2MK0qoFUbKHtNIltOOguP">理想卡组 <span class="k" data-page-node-id="LDcvhlvQumTbXWmkjM2vnH">10-15 张</span>，全游戏最薄。删打击 &gt; 删防御；商店前三次全删打击。篝火升级顺序：<span class="k" data-page-node-id="vbneJBo4Pi9lDtYydeyyLx">爆发 → 警觉 → 心灵堡垒 → 连击</span>（前两张升级后整个角色脱胎换骨）。</p>
+
+    <h3 data-page-node-id="7QI1ZLAJienohuoBa37tdY">占卜（Scry）</h3>
+    <p data-page-node-id="BHAqEWoQBRSCnPmmXLnf99">看抽牌堆顶几张牌并弃掉不要的 —— 比"抽牌"更精细的过滤。有占卜牌（切断命运、第三只眼）优先拿，配「Nirvana」（占卜时获得格挡）和观者占卜遗物极强。</p>
+
+    <h3 data-page-node-id="ozbfKdjOCpRa48qkRmTAsd">遗物</h3>
+    <p data-page-node-id="HtTELtEMqBQ95o5Fy6bBg7"><span class="g" data-page-node-id="GueoOAUnwl02fKfYLUfyuU">强：</span>苦无 / 手里剑 / 折扇（多段快速叠属性）、冰淇淋（观者能量溢出多）、符文金字塔、所有占卜/姿态相关专属遗物。</p>
+    <p data-page-node-id="w5H4XtP2OIREQppH53rB1L"><span class="b" data-page-node-id="6wdr9VpmkOIEqjZ5AW030U">坑：</span>天鹅绒颈链 <span class="b" data-page-node-id="pAZKMT8SrlmWxuIEPfOl0L">绝对别选</span>（废掉无限连与连击流）；蛇眼慎选。</p>
+
+    <p class="muted" data-page-node-id="hKxtl5rcL9YrZm2GcVV3TC">一句话：薄卡组 → 警觉/爆发双升级 → 平静进、愤怒出白嫖能量 → 双倍伤害收割 → 别在愤怒里挨打。</p>
+  </div>
+</section>
+
+<!-- Boss -->
+<section class="panel" id="p5" data-page-node-id="oPz6OCwCujqnQILvCLcKW5">
+  <div class="card" data-page-node-id="ae34CYlEN4MMDxQtn7VMr4">
+    <h2 data-page-node-id="Ve5XjFxo1t5cI1eNSAXfNw"><span class="dot" style="background:#7a5cc4" data-page-node-id="ZfLwnE6QJKqty4c6DexA7t"></span>Boss 速查</h2>
+    <table data-page-node-id="7GusYQe25nKz0d1R7jFy4f">
+      <tr data-page-node-id="yatuXMyHlP0ZQ5B6PcfsDI"><th style="width:16%" data-page-node-id="cRXBkybP04KIRxniXrAuqh">Boss</th><th style="width:38%" data-page-node-id="nlsuR4FV1N3sCDOqotjMuS">机制 / 威胁</th><th data-page-node-id="vpcz1puwOwUp88VLoDn3px">对策</th></tr>
+      <tr data-page-node-id="CxFY5TovdRTkjvW9rjrYVY">
+        <td class="k" data-page-node-id="qwzzCtx4MzBOBEzgUDicas">六火鬼<br data-page-node-id="9mwgFnoTXglVk78eVBEEWF"><span class="muted" data-page-node-id="vHZSXoQFn9O0sSSSLFt6u6">第一层</span></td>
+        <td data-page-node-id="gCohVbv3w6k94v67I2lnzL">攻击伤害<span class="b" data-page-node-id="1MELxEMCpjP92VBG4Fbfl8">逐回合递增</span>，拖越久越痛</td>
+        <td data-page-node-id="lNOSPUGf56CYg0LcAshLJ2">速杀，别拖。力量流 / 愤怒姿态正好克制；中毒流无视它的高攻</td>
+      </tr>
+      <tr data-page-node-id="5IMpRM0UozgbaLKFe89SE4">
+        <td class="k" data-page-node-id="6TS7aaOtOHySDhYOvxFjYm">史莱姆老大<br data-page-node-id="VSGGkeWFkGENjCUZU4nXxM"><span class="muted" data-page-node-id="TUYzrGIPidyfKG4sBkKTxC">第一层</span></td>
+        <td data-page-node-id="lfJHGmQIn0DacHt9FYy9UX">半血<span class="b" data-page-node-id="JhevRun3rHPtC2cfibjor5">分裂成两只</span></td>
+        <td data-page-node-id="nRxxGYv1UvvRu6xAWmHyTv">满血时别把大招全交了，留一手 AOE 清分裂体（电动力学、旋风斩、尸爆术）</td>
+      </tr>
+      <tr data-page-node-id="DJsHRQRY6UkdPocICWOTh8">
+        <td class="k" data-page-node-id="XWUITDtLiFxBjT8zDBYwrr">守护者<br data-page-node-id="e5EE6s0dx2N8eugXIf5sbE"><span class="muted" data-page-node-id="s2d6fDQPvpZAZYHYcaHFhN">第一层</span></td>
+        <td data-page-node-id="BghVuE6mVleaompXvFZhgV">会进入<span class="b" data-page-node-id="uyVCEhNt2BNV9O38Dsj3wD">防御模式</span>，此时输出全被吃掉</td>
+        <td data-page-node-id="15OLGxRkj3aEGXwBQD2L3N">等它切回攻击再打。愤怒姿态下尤其别浪费</td>
+      </tr>
+      <tr data-page-node-id="9u0cAhIjv5di301nr7tpw6">
+        <td class="k" data-page-node-id="9aY0ukxBgvHnMcgHjBXvPz">冠军<br data-page-node-id="tkZYQAkHMZsST512o1FKrF"><span class="muted" data-page-node-id="h5HDrJlyAN0hVcyfuDgdip">第二层</span></td>
+        <td data-page-node-id="SXOMmATsdnX9cjdDY3N2Tk">血量掉到<span class="b" data-page-node-id="Mw4Sn8AewHFYD0SnyBAb3i">一半进入狂暴</span>，爆发极高</td>
+        <td data-page-node-id="leveVvrlWeFQjpKmpAETEJ"><span class="k" data-page-node-id="k6QNlukMJnYdiGANYgYsfJ">提前攒资源</span>，半血那一刻一波带走。战士：攒力量 + 重刃；观者：愤怒一波；机器人：铺满冰霜硬吃</td>
+      </tr>
+      <tr data-page-node-id="wSFtvv6i8qdQPOwuMv7B7R">
+        <td class="k" data-page-node-id="BCDEoFzOuqFSgki5VQlcyF">噬时者<br data-page-node-id="LfleKbVBBPzYwtSIG3pedR"><span class="muted" data-page-node-id="ttHeDvLbjKb6kuOik3fJLV">第三层</span></td>
+        <td data-page-node-id="5wrHgSalJ6XCtrMCrG9HHJ">每打 <span class="b" data-page-node-id="G0eDO7dmAoCwzntakHn2Z1">12 张牌强制结束回合</span></td>
+        <td data-page-node-id="zql4ak869aVILWj8x9Dzuf">这是"卡组要精简"最直白的证明。少打废牌，用大数值单卡；弃牌流 / 连击流会被卡住</td>
+      </tr>
+    </table>
+    <p class="muted" data-page-node-id="GqKge12uJrQA1buOoo5GsU">第三层还有双 Boss（Donu &amp; Deca）与觉醒者，前者的持续输出要求高，后者会惩罚力量叠加 —— 力量流遇到觉醒者要更谨慎。</p>
+  </div>
+
+  <div class="card" data-page-node-id="TPdXnhBtkoY2PLgcly2YoT">
+    <h2 data-page-node-id="5DnEs7Mvto7ntPThAcpSzm"><span class="dot" style="background:#7a5cc4" data-page-node-id="KqmhJnlDCXzHL9TUkZeeIt"></span>心态</h2>
+    <p data-page-node-id="9U8Xj9e1KG8hEdH4CIZQib">前 10-20 局死掉都是正常的。这游戏的乐趣在于"下一次我会更聪明" —— 等你第一次通关，会发现前面所有看似正确的直觉（拿光所有牌、死守血量）几乎都是错的。</p>
+  </div>
+</section>
+
+
+<!-- 工具 -->
+<section class="panel" id="p10">
+  <div class="card">
+    <h2><span class="dot" style="background:#2f6fb5"></span>卡组诊断器</h2>
+    <p class="muted">把你的卡组一行一张粘进来（可以写"打击 x5"或只写牌名），它会告诉你卡组有什么问题。<span class="k">纯本地运算，不联网。</span></p>
+    <label class="fl" for="deck">卡组</label>
+    <textarea class="io" id="deck" placeholder="打击&#10;打击&#10;防御&#10;剧毒烟雾&#10;催化剂&#10;冲刺&#10;杂技"></textarea>
+    <button class="btn" id="btnDeck">诊断卡组</button>
+    <div class="out" id="outDeck"></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="dot" style="background:#2f6fb5"></span>死亡复盘</h2>
+    <p class="muted">选一下你这局是怎么死的，反推最可能的原因。适合死得莫名其妙的时候对照。</p>
+    <div class="row">
+      <div>
+        <label class="fl" for="f1">死在第几层</label>
+        <select class="io" id="f1">
+          <option value="1">第一层</option>
+          <option value="2">第二层</option>
+          <option value="3">第三层</option>
+        </select>
+      </div>
+      <div>
+        <label class="fl" for="f2">死在什么敌人手上</label>
+        <select class="io" id="f2">
+          <option value="normal">普通怪</option>
+          <option value="elite">精英怪</option>
+          <option value="boss">Boss</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <label class="fl" for="f3">卡组多少张</label>
+        <select class="io" id="f3">
+          <option value="s">&lt; 15 张</option>
+          <option value="m" selected>15-20 张</option>
+          <option value="l">21-25 张</option>
+          <option value="xl">26-30 张</option>
+          <option value="xxl">&gt; 30 张</option>
+        </select>
+      </div>
+      <div>
+        <label class="fl" for="f4">死因感觉</label>
+        <select class="io" id="f4">
+          <option value="burst">被一波爆发打死</option>
+          <option value="grind">拖太久被磨死</option>
+          <option value="draw">关键牌一直抽不到</option>
+          <option value="debuff">被 debuff / 诅咒搞死</option>
+          <option value="unknown">说不清楚</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn" id="btnPost">复盘</button>
+    <div class="out" id="outPost"></div>
+  </div>
+</section>
+
+<script>
+(function(){
+  /* ---------- 卡组诊断器 ---------- */
+  var GROUPS = {
+    basic:  {name:'基础牌',   ws:['打击','防御','strike','defend']},
+    aoe:    {name:'群体输出', ws:['全体','所有敌人','旋风斩','电动力学','死吧','尸爆','祭礼','whirlwind','electrodynamics','die','corpse','consecrate','bowling','conclude']},
+    defense:{name:'防御体系', ws:['格挡','冰霜','尖啸','幽魂','步法','残像','心灵堡垒','壁垒','不以为意','铁流','冲刺','冰川','frost','glacier','piercing','wraith','footwork','after image','mental fortress','barricade','shrug','iron wave','dash']},
+    draw:   {name:'过牌',     ws:['抽','杂技','精算','预谋','rushdown','acrobatics','gamble','prepared','adrenaline','offering','献祭','黑暗拥抱','dark embrace','burning pact','燃烧契约','scrawl','飞掠']},
+    finish: {name:'核心输出', ws:['力量','重刃','极限突破','剧毒','催化','淬毒','闪电','球状闪电','寒流','黑暗','爪击','连击','愤怒','爆发','警觉','strength','heavy blade','limit break','poison','catalyst','lightning','ball lightning','claw','flurry','eruption','vigilance','demon','恶魔']},
+    thin:   {name:'精简消耗', ws:['消耗','exhaust','腐化','corruption','无痛','feel no pain','second wind','true grit','坚韧']}
+  };
+
+  function parseDeck(text){
+    var lines = text.split(/\n+/), cards = [];
+    for (var i=0;i<lines.length;i++){
+      var raw = lines[i].trim();
+      if (!raw) continue;
+      var m = raw.match(/^(.*?)\s*[xX*×]\s*(\d+)$/);
+      if (m){ var n = parseInt(m[2],10); for (var j=0;j<Math.min(n,30);j++) cards.push(m[1].trim()); }
+      else cards.push(raw);
+    }
+    return cards;
+  }
+
+  function countHit(cards, words){
+    var n = 0;
+    for (var i=0;i<cards.length;i++){
+      var c = cards[i].toLowerCase();
+      for (var j=0;j<words.length;j++){ if (c.indexOf(words[j].toLowerCase()) >= 0){ n++; break; } }
+    }
+    return n;
+  }
+
+  window.__diag = function(){
+    var out = document.getElementById('outDeck');
+    var cards = parseDeck(document.getElementById('deck').value);
+    if (cards.length === 0){ out.innerHTML = '<div class="msg w">先粘贴你的卡组再诊断。</div>'; return; }
+
+    var n = cards.length;
+    var hits = {};
+    for (var k in GROUPS) hits[k] = countHit(cards, GROUPS[k].ws);
+
+    var html = '';
+    function add(cls, txt){ html += '<div class="msg ' + cls + '">' + txt + '</div>'; }
+
+    // 1. 卡组大小
+    if (n <= 15) add('g', '<b>卡组 ' + n + ' 张 —— 非常精简</b>，关键牌抽得到，这是好局的样子。');
+    else if (n <= 20) add('g', '<b>卡组 ' + n + ' 张 —— 健康范围</b>，继续保持，接下来只做替换不做加法。');
+    else if (n <= 25) add('w', '<b>卡组 ' + n + ' 张 —— 偏厚</b>。后面每拿一张牌，都要先删一张。');
+    else if (n <= 30) add('b', '<b>卡组 ' + n + ' 张 —— 过厚</b>。你的关键牌大概率每 3-4 回合才出现一次，这是死亡主因。');
+    else add('b', '<b>卡组 ' + n + ' 张 —— 危险</b>。这已经不是卡组是牌库。立刻停止拿牌，所有金币拿去删牌。');
+
+    // 2. 基础牌
+    if (hits.basic >= 5) add('b', '<b>还有 ' + hits.basic + ' 张基础牌（打击/防御）</b>。这些牌后期几乎没有价值，优先删打击。');
+    else if (hits.basic >= 3) add('w', '还剩 ' + hits.basic + ' 张基础牌，下次商店继续删。');
+    else add('g', '基础牌清理得很干净（剩 ' + hits.basic + ' 张），这一步做对了。');
+
+    // 3. 套路方向
+    var order = ['finish','defense','draw','aoe','thin'];
+    var top = null;
+    for (var i=0;i<order.length;i++){ if (!top || hits[order[i]] > hits[top]) top = order[i]; }
+    html += '<div class="stat">结构统计：核心输出 ' + hits.finish + ' · 防御 ' + hits.defense + ' · 过牌 ' + hits.draw + ' · 群体 ' + hits.aoe + ' · 消耗 ' + hits.thin + '</div>';
+
+    // 4. 缺什么
+    if (hits.aoe === 0) add('b', '<b>没有群体输出（AOE）</b>。第二层开始全是成群敌人，没有 AOE 会被活活磨死。');
+    if (hits.defense <= 1) add('b', '<b>防御严重不足</b>。第三层没有稳定格挡，再高的输出也撑不到出手机会。');
+    if (hits.draw === 0) add('w', '<b>没有过牌</b>。关键牌抽不到时你会很无力，补 1-2 张抽牌牌。');
+    if (hits.finish <= 1) add('b', '<b>核心输出不足</b>。你的牌组没有"一张牌决定胜负"的终点，伤害会不够打 Boss。');
+    if (hits.finish >= 3 && hits.defense >= 2 && hits.draw >= 1 && hits.aoe >= 1) add('g', '四个维度都有覆盖，结构完整 —— 这局的胜负取决于操作而不是卡组了。');
+
+    // 5. 套路一致性
+    var mixed = 0;
+    if (hits.finish >= 2 && hits.defense >= 3) mixed = 1;
+    if (mixed) add('w', '输出和防御占比接近，注意<span class="k">套路是否摇摆</span>：两套都想要，往往两套都不成型。第一层末就该定方向。');
+
+    add('', '<span class="muted">诊断基于关键词匹配，只作方向性参考 —— 具体强度以你的实际手感为准。</span>');
+    out.innerHTML = html;
+  };
+
+  /* ---------- 死亡复盘 ---------- */
+  window.__post = function(){
+    var out = document.getElementById('outPost');
+    var lv = document.getElementById('f1').value;
+    var en = document.getElementById('f2').value;
+    var sz = document.getElementById('f3').value;
+    var why = document.getElementById('f4').value;
+    var html = '';
+    function add(cls, txt){ html += '<div class="msg ' + cls + '">' + txt + '</div>'; }
+
+    // 卡组厚度：最优先
+    if (sz === 'xxl') add('b', '<b>第一嫌疑：卡组超过 30 张。</b>关键牌沉底，你每场战斗都在用一堆废牌硬撑。所有金币拿去删牌，战斗奖励一个都别拿。');
+    else if (sz === 'xl') add('b', '<b>第一嫌疑：卡组 26-30 张，偏厚。</b>把打击删干净、停止拿"看着不错"的牌，先回到 20 张以内。');
+    else if (sz === 'l') add('w', '卡组 21-25 张，偏厚。后续只做替换（拿一张、删一张）。');
+
+    // 层数 + 敌人
+    if (lv === '1'){
+      if (en === 'elite') add('b', '<b>死在第一层精英：</b>多半是<span class="k">输出不够就进精英</span>。进精英前至少要有 2 张新攻击牌、血量 ≥ 70%，并带一瓶药水。');
+      if (en === 'normal') add('w', '死在第一层普通怪：通常是<span class="k">没看敌人意图</span>，或者起手输出太弱还没补牌。前 3 场的唯一任务就是补输出。');
+      if (en === 'boss') add('w', '死在第一层 Boss：多数是<span class="k">血线太低就进 Boss</span>或核心牌没升级。进 Boss 前留一个篝火升级，血量补到 50% 以上。');
+    }
+    if (lv === '2'){
+      if (en === 'normal') add('b', '<b>死在第二层普通怪：</b>第二层小怪成群且伤害跳档，<span class="k">缺 AOE 或防御体系没成型</span>是主因。');
+      if (en === 'elite') add('b', '<b>死在第二层精英：</b>这三个精英（地精首领 / 刺杀之书 / 工头）都<span class="k">惩罚消耗战</span>。要么速杀，要么有真正的格挡体系，不能拖。');
+      if (en === 'boss') add('w', '死在第二层 Boss：冠军半血狂暴那一波需要<span class="k">提前攒资源</span>；别在它半血时还在铺场。');
+    }
+    if (lv === '3'){
+      if (en === 'elite') add('b', '<b>死在第三层精英：</b>巨头和复仇女神都在<span class="k">惩罚"输出不够"和"看不懂机制"</span>。复仇女神进入无形时别浪费输出。');
+      if (en === 'boss') add('b', '<b>死在第三层 Boss：</b>噬时者每 12 张牌强制结束回合 —— <span class="k">精简卡组比多加牌有用得多</span>。');
+      if (en === 'normal') add('b', '死在第三层普通怪：说明<span class="k">防御体系没建起来</span>，第三层小怪血量高，裸输出会被反杀。');
+    }
+
+    // 死因
+    if (why === 'draw') add('b', '<b>关键牌抽不到</b> = 卡组太厚或没过牌。这是纯构筑问题，见上面的删牌建议。');
+    if (why === 'grind') add('w', '<b>被磨死</b> = 输出终端不够。你需要一张"打出去就赢"的牌（重刃 / 催化剂 / 大球 / 愤怒一波），而不是更多中庸牌。');
+    if (why === 'burst') add('w', '<b>被一波爆发打死</b> = 没看意图或防御留手不够。敌人意图图标是攻击就先防御，别赌能先手杀掉。');
+    if (why === 'debuff') add('w', '<b>被 debuff / 诅咒搞死</b> = 需要净化手段（人工制品、净化类牌）或提前上虚弱削弱它。');
+
+    add('', '<span class="muted">复盘给的是概率最高的原因，不是唯一答案。把卡组粘进上面的诊断器一起看，会更准。</span>');
+    out.innerHTML = html;
+  };
+
+  var bd = document.getElementById('btnDeck');
+  if (bd) bd.addEventListener('click', window.__diag);
+  var bp = document.getElementById('btnPost');
+  if (bp) bp.addEventListener('click', window.__post);
+})();
+</script>
+
+
+</main>
+
+<footer data-page-node-id="j8pvfflvB5D8YRR1UtUghx">Switch 版《杀戮尖塔》开荒速查 · 卡面数值与译名以游戏内显示为准</footer>
+
+<script>
+(function(){
+  var btns = document.querySelectorAll('nav button');
+  var panels = document.querySelectorAll('.panel');
+  btns.forEach(function(b){
+    b.addEventListener('click', function(){
+      btns.forEach(function(x){x.classList.remove('on');});
+      panels.forEach(function(p){p.classList.remove('on');});
+      b.classList.add('on');
+      document.getElementById(b.dataset.t).classList.add('on');
+      window.scrollTo(0,0);
+    });
+  });
+})();
+</script>
+
+<script>
+// 离线支持：仅在 http(s) 下注册（本地 file:// 打开时自动跳过）
+(function(){
+  if (!('serviceWorker' in navigator)) return;
+  if (location.protocol !== 'http:' && location.protocol !== 'https:') return;
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('sw.js').catch(function(){});
+  });
+})();
+</script>
+
+</body>
+</html>
