@@ -1,7 +1,7 @@
 {
-  "name": "杀戮尖塔 开荒速查表",
-  "short_name": "StS 速查",
-  "description": "Switch 版《杀戮尖塔》四角色开荒指南、敌人图鉴、决策清单与卡组诊断工具",
+  "name": "尖塔开荒手册",
+  "short_name": "尖塔手册",
+  "description": "Switch 版《杀戮尖塔》开荒手册：四角色指南、敌人图鉴、决策清单、遗物分级与卡组诊断工具",
   "start_url": "./sts-cheatsheet.html",
   "scope": "./",
   "display": "standalone",
@@ -10,8 +10,23 @@
   "theme_color": "#f6f4ef",
   "lang": "zh-CN",
   "icons": [
-    {"src": "./icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
-    {"src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
-    {"src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ]
 }
