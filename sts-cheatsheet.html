@@ -1047,10 +1047,10 @@ label.fl{display:block;font-size:12.5px;color:var(--ink-2);margin:10px 0 4px}
 /* ---------- 组卡器 ---------- */
 var CARD_DB = {
 war: [
- ['打击','Strike'],['防御','Defend'],['猛击','Bash'],
- ['愤怒','Anger'],['顺劈斩','Cleave'],['双重打击','Twin Strike'],['全身撞击','Body Slam'],['重刃','Heavy Blade'],['铁流','Iron Wave'],['完美打击','Perfected Strike'],['剑刃回旋','Sword Boomerang'],['闪电霹雳','Thunderclap'],['狂野打击','Wild Strike'],['金刚臂','Clothesline'],['头槌','Headbutt'],['上勾拳','Uppercut'],['剑柄打击','Pommel Strike'],['战吼','Battle Trance'],['以血还血','Blood for Blood'],['灼热打击','Searing Blow'],
- ['武装','Armaments'],['放血','Bloodletting'],['燃烧契约','Burning Pact'],['大屠杀','Carnage'],['燃烧','Combust'],['黑暗拥抱','Dark Embrace'],['缴械','Disarm'],['双持武器','Dual Wield'],['坚守','Entrench'],['演化','Evolve'],['柔韧','Flex'],['幽魂护甲','Ghostly Armor'],['血流澎湃','Hemokinesis'],['激怒','Inflame'],['威慑','Intimidate'],['狂怒','Rage'],['暴走','Rampage'],['破裂','Rupture'],['看见红色','Seeing Red'],['哨兵','Sentinel'],['斩断灵魂','Sever Soul'],['不以为意','Shrug It Off'],['旋风斩','Whirlwind'],
- ['狂暴','Berserk'],['重锤','Bludgeon'],['残暴','Brutality'],['腐化','Corruption'],['恶魔形态','Demon Form'],['连击','Double Tap'],['献祭','Offering'],['固若金汤','Impervious'],['势不可当','Juggernaut'],['极限突破','Limit Break'],['收割者','Reaper'],
+ ['打击','Strike'],['防御','Defend'],['痛击','Bash'],
+ ['愤怒','Anger'],['顺劈斩','Cleave'],['双重打击','Twin Strike'],['全身撞击','Body Slam'],['重刃','Heavy Blade'],['铁斩波','Iron Wave'],['完美打击','Perfected Strike'],['剑刃回旋','Sword Boomerang'],['闪电霹雳','Thunderclap'],['狂野打击','Wild Strike'],['金刚臂','Clothesline'],['头槌','Headbutt'],['上勾拳','Uppercut'],['剑柄打击','Pommel Strike'],['战吼','Battle Trance'],['以血还血','Blood for Blood'],['灼热打击','Searing Blow'],
+ ['武装','Armaments'],['放血','Bloodletting'],['燃烧契约','Burning Pact'],['大屠杀','Carnage'],['燃烧','Combust'],['黑暗之拥','Dark Embrace'],['缴械','Disarm'],['双持武器','Dual Wield'],['坚守','Entrench'],['进化','Evolve'],['柔韧','Flex'],['幽魂护甲','Ghostly Armor'],['血流澎湃','Hemokinesis'],['观察弱点','Inflame'],['威慑','Intimidate'],['狂怒','Rage'],['暴走','Rampage'],['破裂','Rupture'],['看见红色','Seeing Red'],['哨兵','Sentinel'],['斩断灵魂','Sever Soul'],['不以为意','Shrug It Off'],['旋风斩','Whirlwind'],
+ ['狂暴','Berserk'],['重锤','Bludgeon'],['残暴','Brutality'],['腐化','Corruption'],['恶魔形态','Demon Form'],['连击','Double Tap'],['祭品','Offering'],['固若金汤','Impervious'],['势不可当','Juggernaut'],['突破极限','Limit Break'],['收割者','Reaper'],
  ['交锋','Clash'],
  ['飞身踢','Dropkick'],
  ['无谋冲锋','Reckless Charge'],
@@ -1065,7 +1065,9 @@ war: [
  ['无惧疼痛','Feel No Pain'],
  ['火焰吐息','Fire Breathing'],
  ['金属化','Metallicize'],
- ['壁垒','Barricade']
+ ['壁垒','Barricade'],
+ ['连续拳','Twin Strike2'],
+ ['撕裂','Rupture2']
 ],
 sil: [
  ['打击','Strike'],['防御','Defend'],['中和','Neutralize'],['幸存者','Survivor'],
@@ -1080,13 +1082,15 @@ sil: [
  ['炼制药水','Potion Brew'],
  ['毒雾','Noxious Fumes'],
  ['凌迟','Riddle with Holes'],
- ['必备工具','Tools of the Trade']
+ ['必备工具','Tools of the Trade'],
+ ['战术大师','WelltLaid'],
+ ['炼制药水','PotionBrew']
 ],
 def: [
  ['打击','Strike'],['防御','Defend'],
  ['球状闪电','Ball Lightning'],['弹幕','Barrage'],['光束细胞','Beam Cell'],['充能电池','Charge Battery'],['爪击','Claw'],['寒流','Cold Snap'],['编译驱动','Compile Driver'],['冷静','Coolheaded'],['愁云惨淡','Doom and Gloom'],['双倍能量','Double Energy'],['均衡','Equilibrium'],['瞄准靶心','Go for the Eyes'],['全息影像','Hologram'],['飞跃','Leap'],['递归','Recursion'],['回弹','Rebound'],['狂乱撕扯','Rip and Tear'],['堆栈','Stack'],['蒸汽护壁','Steam Barrier'],['扫荡射线','Sweeping Beam'],['聚变','Fusion'],['暴风雨','Tempest'],
  ['自动护盾','Auto-Shields'],['暴风雪','Blizzard'],['眼部攻击','Bullseye'],['电容器','Capacitor'],['混沌','Chaos'],['寒意','Chill'],['消耗','Consume'],['黑暗','Darkness'],['碎片整理','Defragment'],['电动力学','Electrodynamics'],['裂变','Fission'],['力场','Force Field'],['遗传算法','Genetic Algorithm'],['冰川','Glacier'],['散热器','Heatsinks'],['你好世界','Hello World'],['循环','Loop'],['超频','Overclock'],['彩虹','Rainbow'],['重编程','Reprogram'],['倒带','Rewind'],['自我修复','Self Repair'],['略读','Skim'],['静电释放','Static Discharge'],['雷霆打击','Sunder'],['白噪声','White Noise'],
- ['合众为一','All for One'],['偏见认知','Biased Cognition'],['缓冲','Buffer'],['核心冲击','Core Surge'],['创意AI','Creative AI'],['回响形态','Echo Form'],['启动流程','Energy Conversion'],['超越光速','FTL'],['超级光束','Hyperbeam'],['机器学习','Machine Learning'],['陨石打击','Meteor Strike'],['多重施法','Multi-Cast'],['搜寻','Seek'],
+ ['合众为一','All for One'],['偏差认知','Biased Cognition'],['缓冲','Buffer'],['核心冲击','Core Surge'],['创造性AI','Creative AI'],['回响形态','Echo Form'],['启动流程','Energy Conversion'],['超越光速','FTL'],['超级光束','Hyperbeam'],['机器学习','Machine Learning'],['陨石打击','Meteor Strike'],['多重施法','Multi-Cast'],['搜寻','Seek'],
  ['熔化','Melter'],
  ['刮削','Scrape'],
  ['分离','Split'],
@@ -1100,7 +1104,7 @@ wat: [
  ['打击','Strike'],['防御','Defend'],['爆发','Eruption'],['警觉','Vigilance'],
  ['渐强','Crescendo'],['只是走运','Just Lucky'],['保护','Protect'],['腰鞭','Sash Whip'],['评估','Evaluate'],['连环快打','Flurry of Blows'],['追击','Follow-Up'],['无惧邪恶','Fear No Evil'],['飞袖','Flying Sleeves'],['结论','Conclude'],['停止','Halt'],['宁静','Tranquility'],
  ['与手交谈','Talk to the Hand'],['轮踢','Wheel Kick'],['崇拜','Worship'],['俯拜','Prostrate'],['心灵堡垒','Mental Fortress'],['涌动','Rushdown'],['雕刻现实','Carve Reality'],['切断命运','Cut Through Fate'],['空拳','Empty Fist'],['空心','Empty Mind'],['空身','Empty Body'],['异邦影响','Foreign Influence'],['节食','Fasting'],['干预','Intervention'],['如水','Like Water'],['冥想','Meditate'],['涅槃','Nirvana'],['坚持不懈','Perseverance'],['穴道','Pressure Points'],['轮回','Samsara'],['圣洁','Sanctity'],['酝酿怒火','Simmering Fury'],['学习','Study'],['暴怒','Tantrum'],['猛击','Wallop'],['挥手','Wave of the Hand'],['风车打击','Windmill Strike'],['虫洞','Wormholes'],
- ['阿尔法','Alpha'],['弑神','Blasphemy'],['构想之刃','Conjure Blade'],['献身','Devotion'],['建立秩序','Establish Order'],['审判','Judgement'],['前车之鉴','Lesson Learned'],['主现实','Master Reality'],['全知','Omniscience'],['毁灭','Ruin'],['笔走龙蛇','Scrawl'],['时间跳跃','Vault'],['渴望','Wanderlust'],['愿望','Wish'],['诸神黄昏','Ragnarok'],
+ ['阿尔法','Alpha'],['渎神','Blasphemy'],['构想之刃','Conjure Blade'],['献身','Devotion'],['建立秩序','Establish Order'],['审判','Judgement'],['前车之鉴','Lesson Learned'],['主现实','Master Reality'],['全知','Omniscience'],['毁灭','Ruin'],['笔走龙蛇','Scrawl'],['时间跳跃','Vault'],['渴望','Wanderlust'],['愿望','Wish'],['诸神黄昏','Ragnarok'],
  ['碰撞连击','Bowling Bash'],
  ['供奉','Consecrate'],
  ['粉碎关节','Crush Joints'],
@@ -1120,10 +1124,12 @@ wat: [
  ['先见之明','Foresight'],
  ['战歌','Battle Hymn'],
  ['猛虎下山','Tiger Lunge'],
- ['天人形态','Divinity']
+ ['天人形态','Divinity'],
+ ['警惕','Vigilance2'],
+ ['研习','Study2']
 ],
 col: [
- ['神格化','Apotheosis'],['包扎','Bandage Up'],['盲目','Blind'],['深呼吸','Deep Breath'],['探索','Discovery'],['不耐','Impatience'],['样样精通','Jack of All Trades'],['恐慌按钮','Panic Button'],['清洗','Purge'],['迅疾打击','Swift Strike'],['绊倒','Trip'],['钢铁闪现','Flash of Steel'],['灵巧','Finesse'],['心灵爆破','Mind Blast'],['喘息','Second Wind'],['贪婪之手','Hand of Greed'],['魔法灯笼','Magnetism'],['变形','Metamorphosis'],['秘密技术','Secret Technique'],['秘密武器','Secret Weapon'],
+ ['神化','Apotheosis'],['包扎','Bandage Up'],['盲目','Blind'],['深呼吸','Deep Breath'],['探索','Discovery'],['不耐','Impatience'],['样样精通','Jack of All Trades'],['恐慌按钮','Panic Button'],['清洗','Purge'],['迅疾打击','Swift Strike'],['绊倒','Trip'],['钢铁闪现','Flash of Steel'],['灵巧','Finesse'],['心灵爆破','Mind Blast'],['喘息','Second Wind'],['贪婪之手','Hand of Greed'],['魔法灯笼','Magnetism'],['变形','Metamorphosis'],['秘密技术','Secret Technique'],['秘密武器','Secret Weapon'],
  ['灭除之刃','Ritual Dagger'],
  ['噬咬','Bite'],
  ['小刀','Shiv'],
