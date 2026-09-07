@@ -811,6 +811,12 @@ label.fl{display:block;font-size:12.5px;color:var(--ink-2);margin:10px 0 4px}
   <div class="card">
     <h2><span class="dot" style="background:#2f6fb5"></span>组卡器（点选，免打字）</h2>
     <p class="muted">选角色 → 点牌加卡 → 填入下方诊断。牌库收的是常用牌，<span class="k">没有的牌直接在下面的文本框里补写</span>（手机键盘的语音输入念牌名也很快）。</p>
+    <div class="chars" id="catTabs" data-cur="all" style="margin:2px 0 6px">
+      <button class="on" data-c="all">全部</button>
+      <button data-c="A">攻击</button>
+      <button data-c="S">技能</button>
+      <button data-c="P">能力</button>
+    </div>
     <div class="chars" id="charTabs">
       <button class="on" data-c="war">战士</button>
       <button data-c="sil">猎人</button>
@@ -1046,223 +1052,25 @@ label.fl{display:block;font-size:12.5px;color:var(--ink-2);margin:10px 0 4px}
 
 /* ---------- 组卡器 ---------- */
 var CARD_DB = {
-war: [
- ['打击','Strike'],['防御','Defend'],['痛击','Bash'],
- ['愤怒','Anger'],['顺劈斩','Cleave'],['双重打击','Twin Strike'],['全身撞击','Body Slam'],['重刃','Heavy Blade'],['铁斩波','Iron Wave'],['完美打击','Perfected Strike'],['闪电霹雳','Thunderclap'],['狂野打击','Wild Strike'],['金刚臂','Clothesline'],['头槌','Headbutt'],['上勾拳','Uppercut'],['剑柄打击','Pommel Strike'],['战吼','Battle Trance'],['以血还血','Blood for Blood'], ['武装','Armaments'],['放血','Bloodletting'],['燃烧契约','Burning Pact'],['燃烧','Combust'],['黑暗之拥','Dark Embrace'],['缴械','Disarm'],['进化','Evolve'],['燃烧','Inflame'],['观察弱点','Spot Weakness'],['狂怒','Rage'],['暴走','Rampage'],['旋风斩','Whirlwind'],
- ['狂暴','Berserk'],['重锤','Bludgeon'],['残暴','Brutality'],['腐化','Corruption'],['恶魔形态','Demon Form'],['祭品','Offering'],['势不可当','Juggernaut'],['突破极限','Limit Break'],
- ['交锋','Clash'],
- ['飞身踢','Dropkick'],
- ['无谋冲锋','Reckless Charge'],
- ['狂宴','Feed'],
- ['燔祭','Immolate'],
- ['坚毅','True Grit'],
- ['火焰屏障','Flame Barrier'],
- ['硬撑','Second Wind'],
- ['重振精神','Feeling No Pain'],
- ['震荡波','Shockwave'],
- ['发掘','Exhume'],
- ['无惧疼痛','Feel No Pain'],
- ['火焰吐息','Fire Breathing'],
- ['金属化','Metallicize'],
- ['壁垒','Barricade'],
- ['连续拳','Twin Strike2'],
- ['撕裂','Rupture2'],
- ['飞剑回旋镖','Sword Boomerang'],
- ['御血术','Hemokinesis'],
- ['灼热攻击','Searing Blow'],
- ['断魂斩','Sever Soul'],
- ['残杀','Carnage'],
- ['恶魔之焰','Immolate'],
- ['死亡收割','Reaper'],
- ['活动肌肉','Flex'],
- ['破灭','Rupture'],
- ['耸肩无视','Shrug It Off'],
- ['双持','Dual Wield'],
- ['巩固','Entrench'],
- ['幽灵铠甲','Ghostly Armor'],
- ['地狱之刃','Blood for Blood'],
- ['威吓','Intimidate'],
- ['战斗专注','Battle Trance'],
- ['盛怒','Anger'],
- ['哨卫','Sentinel'],
- ['双发','Double Tap'],
- ['岿然不动','Impervious'],
- ['自燃','Combust']
+war: [['打击','Strike','A','B'],['痛击','Bash','A','B'],['愤怒','Anger','A','C'],['头槌','Headbutt','A','C'],['重刃','Heavy Blade','A','C'],['铁斩波','Iron Wave','A','C'],['完美打击','Perfected Strike','A','C'],['剑柄打击','Pommel Strike','A','C'],['飞剑回旋镖','Sword Boomerang','A','C'],['闪电霹雳','Thunderclap','A','C'],['双重打击','Twin Strike','A','C'],['狂野打击','Wild Strike','A','C'],['全身撞击','Body Slam','A','C'],['交锋','Clash','A','C'],['顺劈斩','Cleave','A','C'],['金刚臂','Clothesline','A','C'],['飞身踢','Dropkick','A','U'],['御血术','Hemokinesis','A','U'],['连续拳','Twin Strike2','A','U'],['暴走','Rampage','A','U'],['无谋冲锋','Reckless Charge','A','U'],['灼热攻击','Searing Blow','A','U'],['断魂斩','Sever Soul','A','U'],['上勾拳','Uppercut','A','U'],['以血还血','Blood for Blood','A','U'],['旋风斩','Whirlwind','A','U'],['残杀','Carnage','A','U'],['狂宴','Feed','A','R'],['恶魔之焰','Fiend Fire','A','R'],['燔祭','Immolate','A','R'],['死亡收割','Reaper','A','R'],['重锤','Bludgeon','A','R'],
+['防御','Defend','S','B'],['武装','Armaments','S','C'],['活动肌肉','Flex','S','C'],['破灭','Rupture','S','C'],['耸肩无视','Shrug It Off','S','C'],['坚毅','True Grit','S','C'],['战吼','Battle Trance','S','C'],['缴械','Disarm','S','U'],['双持','Dual Wield','S','U'],['巩固','Entrench','S','U'],['火焰屏障','Flame Barrier','S','U'],['幽灵铠甲','Ghostly Armor','S','U'],['地狱之刃','Blood for Blood2','S','U'],['威吓','Intimidate','S','U'],['硬撑','Second Wind2','S','U'],['狂怒','Rage','S','U'],['战斗专注','Battle Trance2','S','U'],['重振精神','Second Wind','S','U'],['盛怒','Anger2','S','U'],['哨卫','Sentinel','S','U'],['震荡波','Shockwave','S','U'],['观察弱点','Spot Weakness','S','U'],['放血','Bloodletting','S','U'],['燃烧契约','Burning Pact','S','U'],['双发','Double Tap','S','R'],['发掘','Exhume','S','R'],['岿然不动','Impervious','S','R'],['突破极限','Limit Break','S','R'],['祭品','Offering','S','R'],
+['进化','Evolve','P','U'],['无惧疼痛','Feel No Pain','P','U'],['火焰吐息','Fire Breathing','P','U'],['燃烧','Inflame','P','U'],['金属化','Metallicize','P','U'],['撕裂','Rupture2','P','U'],['自燃','Combust','P','U'],['黑暗之拥','Dark Embrace','P','U'],['恶魔形态','Demon Form','P','R'],['势不可当','Juggernaut','P','R'],['壁垒','Barricade','P','R'],['狂暴','Berserk','P','R'],['残暴','Brutality','P','R'],['腐化','Corruption','P','R']
 ],
-sil: [
- ['打击','Strike'],['防御','Defend'],['中和','Neutralize'], ['致命毒药','Deadly Poison'],['偏折','Deflect'],['背刺','Backstab'],['刀刃之舞','Blade Dance'],['斗篷与匕首','Cloak and Dagger'],['投掷匕首','Dagger Throw'],['闪躲翻滚','Dodge and Roll'],['逃脱计划','Escape Plan'],['独门技术','Expertise'],['飞膝','Flying Knee'],['抢占先机','Outmaneuver'],['精巧刺击','Piercing Wail'],['带毒刺击','Poisoned Stab'],['早有准备','Prepared'],['快斩','Quick Slash'],['切割','Slice'],['隐秘打击','Sneaky Strike'],
- ['杂技','Acrobatics'],['精准','Accuracy'],['全力攻击','All-Out Attack'],['弹跳药瓶','Bouncing Flask'],['计算下注','Calculated Gamble'],['铁蒺藜','Caltrops'],['致残毒云','Crippling Poison'],['冲刺','Dash'],['声东击西','Distraction'],['无尽苦痛','Endless Agony'],['内脏切除','Eviscerate'],['足跟勾','Heel Hook'],['扫腿','Leg Sweep'],['部署','Setup'],['计划妥当','Well-Laid Plans'],
- ['肾上腺素','Adrenaline'],['无限刀刃','A Thousand Cuts'],['子弹时间','Bullet Time'],['尸爆术','Corpse Explosion'],['黑暗镣铐','Dark Shackles'],['终结技','Dance of Death'],['死吧死吧死吧','Die Die Die'],['涂毒','Envenom'],['华丽收场','Grand Finale'],['萎靡','Malaise'],['夜魇','Night Terror'],['幻影杀手','Phantasmal Killer'],['幽魂形态','Wraith Form'],['钢铁风暴','Storm of Steel'],['炸弹','The Bomb'],
- ['串刺','Skewer'],
- ['玻璃刀刃','Glass Knife'],
- ['后空翻','Backflip'],
- ['尖啸','Dark Wail'],
- ['催化剂','Catalyst'],
- ['炼制药水','Potion Brew'],
- ['毒雾','Noxious Fumes'],
- ['凌迟','Riddle with Holes'],
- ['必备工具','Tools of the Trade'],
- ['战术大师','WelltLaid'],
- ['炼制药水','PotionBrew'],
- ['灾祸','Choke'],
- ['突然一拳','Quick Slash'],
- ['匕首雨','Blade Dance'],
- ['飞镖','Dagger Fan'],
- ['猎杀者','Predator'],
- ['千穿百刺','A Thousand Cuts'],
- ['生存者','Survivor'],
- ['本能反应','Reflex'],
- ['恐怖','Terror'],
- ['残影','After Image'],
- ['全神贯注','Concentrate'],
- ['双重存在','Doppelganger'],
- ['灵动步法','Footwork'],
- ['勒脖','Choke #2'],
- ['余像','After Image #2']
+sil: [['中和','Neutralize','A','B'],['打击','Strike','A','B'],['飞膝','Flying Knee','A','C'],['灾祸','Choke','A','C'],['带毒刺击','Poisoned Stab','A','C'],['快斩','Quick Slash','A','C'],['切割','Slice','A','C'],['突然一拳','Sneaky Strike2','A','C'],['隐秘打击','Sneaky Strike','A','C'],['匕首雨','Blade Dance','A','C'],['投掷匕首','Dagger Throw','A','C'],['无尽苦痛','Endless Agony','A','U'],['内脏切除','Eviscerate','A','U'],['终结技','Finisher','A','U'],['飞镖','Dagger Fan','A','U'],['背刺','Backstab','A','U'],['足跟勾','Heel Hook','A','U'],['精巧刺击','Piercing Wail','A','U'],['猎杀者','Predator','A','U'],['千穿百刺','A Thousand Cuts','A','U'],['串刺','Skewer','A','U'],['全力攻击','All-Out Attack','A','U'],['勒脖','Choke2','A','U'],['冲刺','Dash','A','U'],['华丽收场','Grand Finale','A','R'],['死吧死吧死吧','Die Die Die','A','R'],['玻璃刀刃','Glass Knife','A','R'],
+['生存者','Survivor','S','B'],['防御','Defend','S','B'],['偏折','Deflect','S','C'],['闪躲翻滚','Dodge and Roll','S','C'],['后空翻','Backflip','S','C'],['抢占先机','Outmaneuver','S','C'],['尖啸','Dark Wail','S','C'],['早有准备','Prepared','S','C'],['杂技','Acrobatics','S','C'],['刀刃之舞','Blade Dance2','S','C'],['斗篷与匕首','Cloak and Dagger','S','C'],['致命毒药','Deadly Poison','S','C'],['声东击西','Distraction','S','U'],['逃脱计划','Escape Plan','S','U'],['独门技术','Expertise','S','U'],['扫腿','Leg Sweep','S','U'],['本能反应','Reflex','S','U'],['部署','Setup','S','U'],['战术大师','Terror','S','U'],['恐怖','Terror2','S','U'],['残影','After Image','S','U'],['弹跳药瓶','Bouncing Flask','S','U'],['计算下注','Calculated Gamble','S','U'],['催化剂','Catalyst','S','U'],['全神贯注','Concentrate','S','U'],['致残毒云','Crippling Poison','S','U'],['双重存在','Doppelganger','S','R'],['萎靡','Malaise','S','R'],['夜魇','Night Terror','S','R'],['幻影杀手','Phantasmal Killer','S','R'],['钢铁风暴','Storm of Steel','S','R'],['炼制药水','Potion Brew','S','R'],['子弹时间','Bullet Time','S','R'],['爆发','Burst','S','R'],['肾上腺素','Adrenaline','S','R'],['尸爆术','Corpse Explosion','S','R'],
+['灵动步法','Footwork','P','U'],['无限刀刃','A Thousand Cuts2','P','U'],['毒雾','Noxious Fumes','P','U'],['计划妥当','Well-Laid Plans','P','U'],['铁蒺藜','Caltrops','P','U'],['精准','Accuracy','P','U'],['凌迟','Riddle with Holes','P','R'],['涂毒','Envenom','P','R'],['必备工具','Tools of the Trade','P','R'],['幽魂形态','Wraith Form','P','R'],['余像','After Image2','P','R']
 ],
-def: [
- ['打击','Strike'],['防御','Defend'],
- ['球状闪电','Ball Lightning'],['爪击','Claw'],['寒流','Cold Snap'],['愁云惨淡','Doom and Gloom'],['双倍能量','Double Energy'],['均衡','Equilibrium'],['瞄准靶心','Go for the Eyes'],['全息影像','Hologram'],['飞跃','Leap'],['递归','Recursion'],['狂乱撕扯','Rip and Tear'],['堆栈','Stack'],['蒸汽护壁','Steam Barrier'],['扫荡射线','Sweeping Beam'],['聚变','Fusion'],['暴风雨','Tempest'],
- ['自动护盾','Auto-Shields'],['眼部攻击','Bullseye'],['混沌','Chaos'],['碎片整理','Defragment'],['电动力学','Electrodynamics'],['裂变','Fission'],['力场','Force Field'],['遗传算法','Genetic Algorithm'],['冰川','Glacier'],['循环','Loop'],['超频','Overclock'],['彩虹','Rainbow'],['重编程','Reprogram'],['自我修复','Self Repair'],['静电释放','Static Discharge'],['雷霆打击','Sunder'],['白噪声','White Noise'],['偏差认知','Biased Cognition'],['缓冲','Buffer'],['创造性AI','Creative AI'],['回响形态','Echo Form'],['启动流程','Energy Conversion'],['超越光速','FTL'],['机器学习','Machine Learning'],['陨石打击','Meteor Strike'],['搜寻','Seek'],
- ['熔化','Melter'],
- ['刮削','Scrape'],
- ['分离','Split'],
- ['双重释放','Dualcast'],
- ['回收','Recycle'],
- ['硬化机体','Hardening'],
- ['增幅','Amplify'],
- ['雷暴','Storm'],
- ['弹幕齐射','Barrage'],
- ['弹回','Rebound'],
- ['光束射线','Beam Cell'],
- ['精简改良','Reprogram'],
- ['编译冲击','Compile Driver'],
- ['暴雪','Blizzard'],
- ['超能光束','Hyperbeam'],
- ['万物一心','All for One'],
- ['核心电涌','Core Surge'],
- ['电击','Zap'],
- ['内核加速','Overclock'],
- ['充电','Charge Battery'],
- ['冷静头脑','Coolheaded'],
- ['汇集','Recursion'],
- ['快速检索','Skim'],
- ['冰寒','Chill'],
- ['耗尽','Consume'],
- ['漆黑','Darkness'],
- ['多重释放','Multi-Cast'],
- ['重启','Rewind'],
- ['散热片','Heatsinks'],
- ['你好，世界','Hello World'],
- ['扩容','Capacitor']
+def: [['打击','Strike','A','B'],['爪击','Claw','A','C'],['眼部攻击','Go for the Eyes','A','C'],['球状闪电','Ball Lightning','A','C'],['弹幕齐射','Barrage','A','C'],['弹回','Rebound','A','C'],['光束射线','Beam Cell','A','C'],['精简改良','Streamline','A','C'],['扫荡射线','Sweeping Beam','A','C'],['寒流','Cold Snap','A','C'],['编译冲击','Compile Driver','A','C'],['愁云惨淡','Doom and Gloom','A','U'],['超越光速','FTL','A','U'],['瞄准靶心','Bullseye','A','U'],['熔化','Melter','A','U'],['狂乱撕扯','Rip and Tear','A','U'],['刮削','Scrape','A','U'],['分离','Sunder','A','U'],['暴雪','Blizzard','A','U'],['超能光束','Hyperbeam','A','R'],['陨石打击','Meteor Strike','A','R'],['雷霆打击','Thunder Strike','A','R'],['万物一心','All for One','A','R'],['核心电涌','Core Surge','A','R'],
+['防御','Defend','S','B'],['双重释放','Dualcast','S','B'],['电击','Zap','S','B'],['全息影像','Hologram','S','C'],['飞跃','Leap','S','C'],['递归','Recursion','S','C'],['堆栈','Stack','S','C'],['蒸汽护壁','Steam Barrier','S','C'],['充电','Charge Battery','S','C'],['冷静头脑','Coolheaded','S','C'],['双倍能量','Double Energy','S','U'],['力场','Force Field','S','U'],['聚变','Fusion','S','U'],['遗传算法','Genetic Algorithm','S','U'],['冰川','Glacier','S','U'],['自动护盾','Auto-Shields','S','U'],['汇集','Recursion2','S','U'],['回收','Rebound2','S','U'],['硬化机体','Hardening','S','U'],['重编程','Reprogram','S','U'],['超频','Overclock','S','U'],['暴风雨','Tempest','S','U'],['启动流程','Boot Sequence','S','U'],['均衡','Equilibrium','S','U'],['白噪声','White Noise','S','U'],['冰寒','Chill','S','U'],['混沌','Chaos','S','U'],['耗尽','Consume','S','U'],['漆黑','Darkness','S','U'],['裂变','Fission','S','R'],['多重释放','Multi-Cast','S','R'],['彩虹','Rainbow','S','R'],['重启','Rewind','S','R'],['搜寻','Seek','S','R'],['增幅','Amplify','S','R'],
+['散热片','Heatsinks','P','U'],['你好，世界','Hello World','P','U'],['循环','Loop','P','U'],['自我修复','Self Repair','P','U'],['静电释放','Static Discharge','P','U'],['雷暴','Storm','P','U'],['扩容','Capacitor','P','U'],['碎片整理','Defragment','P','U'],['回响形态','Echo Form','P','R'],['电动力学','Electrodynamics','P','R'],['机器学习','Machine Learning','P','R'],['偏差认知','Biased Cognition','P','R'],['缓冲','Buffer','P','R'],['创造性AI','Creative AI','P','R']
 ],
-wat: [
- ['打击','Strike'],['防御','Defend'],['爆发','Eruption'], ['渐强','Crescendo'],['评估','Evaluate'],['追击','Follow-Up'],['心灵堡垒','Mental Fortress'],['如水','Like Water'],['冥想','Meditate'],['涅槃','Nirvana'],['圣洁','Sanctity'],['暴怒','Tantrum'], ['阿尔法','Alpha'],['渎神','Blasphemy'],['审判','Judgement'],
- ['碰撞连击','Bowling Bash'],
- ['供奉','Consecrate'],
- ['粉碎关节','Crush Joints'],
- ['立地升天','Ascend'],
- ['时之沙','Sands of Time'],
- ['招牌技','Signature Move'],
- ['迂回','Winding'],
- ['旋转打击','Spiraling Strike'],
- ['光辉','Brilliance'],
- ['天眼','Scry'],
- ['内心宁静','Inner Peace'],
- ['祈祷','Pray'],
- ['欺瞒现实','Deceive Reality'],
- ['旋身','Swivel'],
- ['收集','Collect'],
- ['机械降神','Deus Ex Machina'],
- ['先见之明','Foresight'],
- ['战歌','Battle Hymn'],
- ['猛虎下山','Tiger Lunge'],
- ['天人形态','Divinity'],
- ['警惕','Vigilance2'],
- ['研习','Study2'],
- ['化拳为空','Empty Fist'],
- ['疾风连击','Flurry of Blows'],
- ['流云飞袖','Flying Sleeves'],
- ['幸运一击','Just Lucky'],
- ['腰带抽打','Sash Whip'],
- ['斩破命运','Cut Through Fate'],
- ['不惧妖邪','Fear No Evil'],
- ['以手拒之','Talk to the Hand'],
- ['发泄','Tantrum'],
- ['当头棒喝','Wallop'],
- ['回旋踢','Wheel Kick'],
- ['改造现实','Carve Reality'],
- ['结末','Conclude'],
- ['勤学精进','Study'],
- ['诸神之黄昏','Ragnarok'],
- ['化体为空','Empty Body'],
- ['停顿','Halt'],
- ['点穴','Pressure Points'],
- ['五体投地','Prostrate'],
- ['护身','Protect'],
- ['安宁','Tranquility'],
- ['化智为空','Empty Mind'],
- ['他山之石','Foreign Influence'],
- ['义愤填膺','Judgement'],
- ['坚韧','Perseverance'],
- ['怒火中烧','Simmering Fury'],
- ['摆手','Wave of the Hand'],
- ['敬拜','Worship'],
- ['火焰纹','Sands of Time'],
- ['通晓万物','Omniscience'],
- ['潦草急就','Scrawl'],
- ['精神护盾','Mental Fortress'],
- ['腾跃','Vault'],
- ['许愿','Wish'],
- ['聚能成刃','Conjure Blade'],
- ['斋戒','Fasting'],
- ['虔信','Devotion'],
- ['确立基础','Establish Order'],
- ['操控现实','Master Reality']
+wat: [['打击','Strike','A','B'],['暴怒','Eruption','A','B'],['化拳为空','Empty Fist','A','C'],['疾风连击','Flurry of Blows','A','C'],['流云飞袖','Flying Sleeves','A','C'],['追击','Follow-Up','A','C'],['幸运一击','Just Lucky','A','C'],['腰带抽打','Sash Whip','A','C'],['碰撞连击','Bowling Bash','A','C'],['供奉','Consecrate','A','C'],['粉碎关节','Crush Joints','A','C'],['斩破命运','Cut Through Fate','A','C'],['不惧妖邪','Fear No Evil','A','U'],['立地升天','AscensionB','A','U'],['时之沙','Sands of Time','A','U'],['招牌技','Signature Move','A','U'],['以手拒之','Talk to the Hand','A','U'],['发泄','Tantrum','A','U'],['当头棒喝','Wallop','A','U'],['迂回','Winding','A','U'],['回旋踢','Wheel Kick','A','U'],['旋转打击','Spiraling Strike','A','U'],['改造现实','Carve Reality','A','U'],['结末','Conclude','A','U'],['光辉','Brilliance','A','R'],['勤学精进','Study','A','R'],['诸神之黄昏','Ragnarok','A','R'],
+['警惕','Vigilance','S','B'],['防御','Defend','S','B'],['化体为空','Empty Body','S','C'],['评估','Evaluate','S','C'],['停顿','Halt','S','C'],['点穴','Pressure Points','S','C'],['五体投地','Prostrate','S','C'],['护身','Protect','S','C'],['天眼','Scry','S','C'],['安宁','Tranquility','S','C'],['渐强','Crescendo','S','C'],['化智为空','Empty Mind','S','U'],['他山之石','Foreign Influence','S','U'],['义愤填膺','Judgement','S','U'],['内心宁静','Inner Peace','S','U'],['冥想','Meditate','S','U'],['坚韧','Perseverance','S','U'],['祈祷','Pray','S','U'],['圣洁','Sanctity','S','U'],['欺瞒现实','Deceive Reality','S','U'],['怒火中烧','Simmering Fury','S','U'],['旋身','Swivel','S','U'],['摆手','Wave of the Hand','S','U'],['敬拜','Worship','S','U'],['火焰纹','FastingB','S','U'],['收集','Collect','S','U'],['阿尔法','Alpha','S','R'],['机械降神','Deus Ex Machina','S','R'],['审判','Judgement2','S','R'],['通晓万物','Omniscience','S','R'],['潦草急就','Scrawl','S','R'],['精神护盾','Mental Fortress','S','R'],['渎神','Blasphemy','S','R'],['腾跃','Vault','S','R'],['许愿','Wish','S','R'],['聚能成刃','Conjure Blade','S','R'],
+['斋戒','Fasting','P','U'],['先见之明','Foresight','P','U'],['如水','Like Water','P','U'],['心灵堡垒','Mental Fortress2','P','U'],['涅槃','Nirvana','P','U'],['战歌','Battle Hymn','P','U'],['猛虎下山','Tiger Lunge','P','U'],['研习','Study2','P','U'],['天人形态','Divinity','P','R'],['虔信','Devotion','P','R'],['确立基础','Establish Order','P','R'],['操控现实','Master Reality','P','R']
 ],
-col: [
- ['神化','Apotheosis'],['包扎','Bandage Up'],['深呼吸','Deep Breath'],['绊倒','Trip'],['贪婪之手','Hand of Greed'],['秘密武器','Secret Weapon'],
- ['灭除之刃','Ritual Dagger'],
- ['噬咬','Bite'],
- ['小刀','Shiv'],
- ['惩恶','Smite'],
- ['以暴易暴','Violence'],
- ['开悟','Enlightenment'],
- ['妙计','Master of Strategy'],
- ['预谋','Forethought'],
- ['疯狂','Madness'],
- ['万能药','Panacea'],
- ['黑暗镣铐','Dark Shackles'],
- ['战略大师','Mayhem'],
- ['炸弹','The Bomb'],
- ['深谋远虑','Well-Laid Plans'],
- ['结茧','Chrysalis'],
- ['灵体','Apparition'],
- ['洞见','Insight'],
- ['J.A.X.','JAX'],
- ['奇迹','Miracle'],
- ['平安','Safety'],
- ['贝塔','Beta'],
- ['神气制胜','Panache'],
- ['残虐天性','Sadistic Nature'],
- ['心灵震慑','Mind Blast'],
- ['闪亮登场','Flash of Steel'],
- ['亮剑','Swift Strike'],
- ['迅捷打击','Quick Strike'],
- ['仪式匕首','Ritual Dagger'],
- ['发现','Discovery'],
- ['优秀直觉','Second Wind'],
- ['急躁','Impatience'],
- ['花样百出','Jack of All Trades'],
- ['应急按钮','Panic Button'],
- ['净化','Purge'],
- ['致盲','Blind'],
- ['羽化','Mayhem'],
- ['秘密技法','Secret Technique'],
- ['转化','Metamorphosis'],
- ['暴力','Violence'],
- ['磁力','Magnetism'],
- ['乱战','Mayhem #2']
+col: [['闪亮登场','Flash of Steel','A','U'],['亮剑','Swift Strike','A','U'],['心灵震慑','Mind Blast','A','U'],['迅捷打击','Quick Strike','A','U'],['贪婪之手','Hand of Greed','A','R'],['灭除之刃','Ritual Dagger','A','B'],['仪式匕首','Ritual Dagger2','A','B'],['噬咬','Bite','A','B'],['小刀','Shiv','A','B'],['惩恶','Smite','A','B'],['以暴易暴','Violence','A','B'],
+['发现','Discovery','S','U'],['开悟','Enlightenment','S','U'],['妙计','Master of Strategy','S','U'],['预谋','Forethought','S','U'],['优秀直觉','Second Wind2','S','U'],['包扎','Bandage Up','S','U'],['急躁','Impatience','S','U'],['花样百出','Jack of All Trades','S','U'],['疯狂','Madness','S','U'],['万能药','Panacea','S','U'],['应急按钮','Panic Button','S','U'],['净化','Purge','S','U'],['绊倒','Trip','S','U'],['致盲','Blind','S','U'],['黑暗镣铐','Dark Shackles','S','U'],['深呼吸','Deep Breath','S','U'],['神化','Apotheosis','S','R'],['战略大师','Mayhem','S','R'],['羽化','Mayhem2','S','R'],['秘密技法','Secret Technique','S','R'],['秘密武器','Secret Weapon','S','R'],['炸弹','The Bomb','S','R'],['深谋远虑','Well-Laid Plans','S','R'],['转化','Metamorphosis','S','R'],['暴力','Violence2','S','R'],['结茧','Chrysalis','S','R'],['灵体','Apparition','S','B'],['洞见','Insight','S','B'],['J.A.X.','JAX','S','B'],['奇迹','Miracle','S','B'],['平安','Safety','S','B'],['贝塔','Beta','S','B'],
+['磁力','Magnetism','P','R'],['乱战','Mayhem3','P','R'],['神气制胜','Panache','P','R'],['残虐天性','Sadistic Nature','P','R']
 ]
 };
 
@@ -1271,15 +1079,18 @@ var curChar = 'war';
 
 function chipList(){
   var q = (document.getElementById('chipSearch').value || '').trim().toLowerCase();
+  var filter = (document.getElementById('catTabs') ? (document.getElementById('catTabs').dataset.cur || 'all') : 'all');
   var box = document.getElementById('chipBox');
   box.innerHTML = '';
+  var star = {C:'',U:' <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#4a90d9;margin-left:3px"></span>',R:' <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#e0a83c;margin-left:3px"></span>'};
   CARD_DB[curChar].forEach(function(c){
-    var zh = c[0], en = c[1];
+    var zh = c[0], en = c[1], cat = c[2] || 'A', rar = c[3] || 'C';
     if (q && zh.toLowerCase().indexOf(q) < 0 && en.toLowerCase().indexOf(q) < 0) return;
+    if (filter !== 'all' && cat !== filter) return;
     var d = document.createElement('button');
     d.className = 'chip';
     d.type = 'button';
-    d.innerHTML = zh + '<small>' + en + '</small>';
+    d.innerHTML = zh + (star[rar] || '') + '<small>' + en + '</small>';
     d.addEventListener('click', function(){ addPick(zh, en); });
     box.appendChild(d);
   });
@@ -1287,8 +1098,9 @@ function chipList(){
 }
 
 function addPick(zh, en){
-  if (!pickState[en]) pickState[en] = {zh:zh, en:en, n:0};
-  pickState[en].n++;
+  var k = zh;                       /* 键用中文名：库内唯一，跨角色重复英文锚点也不会串卡 */
+  if (!pickState[k]) pickState[k] = {zh:zh, en:en, n:0};
+  pickState[k].n++;
   renderPicked();
 }
 
@@ -1347,6 +1159,15 @@ function pickedToText(){
     });
   });
   document.getElementById('chipSearch').addEventListener('input', chipList);
+  var catBtns = document.querySelectorAll('#catTabs button');
+  catBtns.forEach(function(b){
+    b.addEventListener('click', function(){
+      catBtns.forEach(function(x){ x.classList.remove('on'); });
+      b.classList.add('on');
+      document.getElementById('catTabs').dataset.cur = b.dataset.c;
+      chipList();
+    });
+  });
   document.getElementById('btnPickClear').addEventListener('click', function(){ pickState = {}; renderPicked(); });
   document.getElementById('btnPickDiag').addEventListener('click', function(){
     var extra = document.getElementById('deck').value.trim();
