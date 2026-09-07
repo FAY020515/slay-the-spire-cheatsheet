@@ -116,6 +116,26 @@ label.fl{display:block;font-size:12.5px;color:var(--ink-2);margin:10px 0 4px}
 .msg.b{border-color:#e8c3bf;background:#fdf4f3}
 .stat{font-size:13px;color:var(--ink-3);margin-top:6px}
 
+
+.chars{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 8px}
+.chars button{padding:6px 12px;border:1px solid var(--line);border-radius:20px;background:#fff;color:var(--ink-2);font-size:13px;cursor:pointer;font-family:inherit}
+.chars button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+#chipSearch{margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;max-height:230px;overflow-y:auto;border:1px solid var(--line);border-radius:8px;padding:8px;background:#fdfcfa}
+.chip{padding:6px 10px;border:1px solid var(--line);border-radius:6px;background:#fff;font-size:12.5px;cursor:pointer;line-height:1.3;color:var(--ink)}
+.chip small{display:block;color:var(--ink-3);font-size:10.5px}
+.chip:active{background:#efe9fb}
+.picked{margin-top:10px;border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:#fff}
+.picked .pr{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px dashed var(--line);font-size:13.5px}
+.picked .pr:last-child{border-bottom:none}
+.picked .pr .nm{flex:1}
+.picked .pr button{border:1px solid var(--line);background:#fdfcfa;border-radius:5px;width:26px;height:24px;font-size:13px;cursor:pointer;color:var(--ink);padding:0}
+.picked .pr .del{border:none;background:none;color:var(--bad);font-size:15px;width:22px}
+.pstat{font-size:12.5px;color:var(--ink-3);margin-top:6px}
+.pbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.pbtns .btn{margin-top:0;padding:8px 14px;font-size:13.5px}
+.pbtns .ghost{background:#fff;color:var(--ink-2);border:1px solid var(--line)}
+
 </style>
 </head>
 <body data-page-node-id="FEwxugEipjRDz2k1L2EdOZ">
@@ -787,6 +807,27 @@ label.fl{display:block;font-size:12.5px;color:var(--ink-2);margin:10px 0 4px}
 
 <!-- 工具 -->
 <section class="panel" id="p10">
+
+  <div class="card">
+    <h2><span class="dot" style="background:#2f6fb5"></span>组卡器（点选，免打字）</h2>
+    <p class="muted">选角色 → 点牌加卡 → 填入下方诊断。牌库收的是常用牌，<span class="k">没有的牌直接在下面的文本框里补写</span>（手机键盘的语音输入念牌名也很快）。</p>
+    <div class="chars" id="charTabs">
+      <button class="on" data-c="war">战士</button>
+      <button data-c="sil">猎人</button>
+      <button data-c="def">机器人</button>
+      <button data-c="wat">观者</button>
+      <button data-c="col">通用</button>
+    </div>
+    <input class="io" id="chipSearch" placeholder="搜牌名（中英文都行）">
+    <div class="chips" id="chipBox"></div>
+    <div class="picked" id="pickedBox"></div>
+    <div class="pstat" id="pickStat"></div>
+    <div class="pbtns">
+      <button class="btn" id="btnPickDiag">填入下方并诊断</button>
+      <button class="btn ghost" id="btnPickClear">清空已选</button>
+    </div>
+  </div>
+
   <div class="card">
     <h2><span class="dot" style="background:#2f6fb5"></span>卡组诊断器</h2>
     <p class="muted">把你的卡组一行一张粘进来（可以写"打击 x5"或只写牌名），它会告诉你卡组有什么问题。<span class="k">纯本地运算，不联网。</span></p>
@@ -1002,6 +1043,132 @@ label.fl{display:block;font-size:12.5px;color:var(--ink-2);margin:10px 0 4px}
     navigator.serviceWorker.register('sw.js').catch(function(){});
   });
 })();
+
+/* ---------- 组卡器 ---------- */
+var CARD_DB = {
+war: [
+ ['打击','Strike'],['防御','Defend'],['猛击','Bash'],
+ ['愤怒','Anger'],['顺劈','Cleave'],['双重打击','Twin Strike'],['肉身重压','Body Slam'],['重刃','Heavy Blade'],['铁流','Iron Wave'],['完美打击','Perfected Strike'],['剑刃回旋','Sword Boomerang'],['雷霆一击','Thunderclap'],['狂野打击','Wild Strike'],['锁喉','Clothesline'],['头槌','Headbutt'],['上勾拳','Uppercut'],['剑柄打击','Pommel Strike'],['战意高昂','Battle Trance'],['血债血偿','Blood for Blood'],['灼热打击','Searing Blow'],
+ ['武装','Armaments'],['放血','Bloodletting'],['燃烧契约','Burning Pact'],['大屠杀','Carnage'],['燃烧','Combust'],['黑暗拥抱','Dark Embrace'],['缴械','Disarm'],['双持武器','Dual Wield'],['坚守','Entrench'],['演化','Evolve'],['柔韧','Flex'],['幽魂护甲','Ghostly Armor'],['血流澎湃','Hemokinesis'],['激怒','Inflame'],['威慑','Intimidate'],['狂怒','Rage'],['暴走','Rampage'],['破裂','Rupture'],['看见红色','Seeing Red'],['哨兵','Sentinel'],['斩断灵魂','Sever Soul'],['耸肩','Shrug It Off'],['旋风斩','Whirlwind'],
+ ['狂暴','Berserk'],['重锤','Bludgeon'],['残暴','Brutality'],['腐化','Corruption'],['恶魔形态','Demon Form'],['连击','Double Tap'],['献祭','Offering'],['固若金汤','Impervious'],['铁甲堡垒','Juggernaut'],['极限突破','Limit Break'],['收割者','Reaper']
+],
+sil: [
+ ['打击','Strike'],['防御','Defend'],['中和','Neutralize'],['幸存者','Survivor'],
+ ['致命毒药','Deadly Poison'],['偏斜','Deflect'],['背刺','Backstab'],['刀锋之舞','Blade Dance'],['斗篷与匕首','Cloak and Dagger'],['匕首喷射','Dagger Spray'],['匕首投掷','Dagger Throw'],['翻滚闪避','Dodge and Roll'],['逃跑计划','Escape Plan'],['专业知识','Expertise'],['终结者','Finisher'],['飞膝','Flying Knee'],['智取','Outmaneuver'],['穿透哀嚎','Piercing Wail'],['毒刺','Poisoned Stab'],['准备','Prepared'],['迅捷斩','Quick Slash'],['割裂','Slice'],['偷袭','Sneaky Strike'],
+ ['杂技','Acrobatics'],['精准','Accuracy'],['全力攻击','All-Out Attack'],['扑朔迷离','Blur'],['弹跳烧瓶','Bouncing Flask'],['精算赌博','Calculated Gamble'],['铁蒺藜','Caltrops'],['窒息','Choke'],['集中','Concentrate'],['致残毒药','Crippling Poison'],['冲刺','Dash'],['分心','Distraction'],['无尽痛苦','Endless Agony'],['开膛','Eviscerate'],['步法','Footwork'],['锁踵','Heel Hook'],['扫堂腿','Leg Sweep'],['掠食者','Predator'],['反射','Reflex'],['布局','Setup'],['恐惧','Terror'],['深谋远虑','Well-Laid Plans'],
+ ['肾上腺素','Adrenaline'],['残像','After Image'],['千刀万剐','A Thousand Cuts'],['子弹时间','Bullet Time'],['迸发','Burst'],['尸爆术','Corpse Explosion'],['黑暗镣铐','Dark Shackles'],['死亡之舞','Dance of Death'],['死吧死吧死吧','Die Die Die'],['分身','Doppelganger'],['淬毒','Envenom'],['大结局','Grand Finale'],['痛苦','Malaise'],['夜行恐怖','Night Terror'],['幻影杀手','Phantasmal Killer'],['幽魂形态','Wraith Form'],['钢铁风暴','Storm of Steel'],['炸弹','The Bomb']
+],
+def: [
+ ['打击','Strike'],['防御','Defend'],
+ ['球状闪电','Ball Lightning'],['弹幕','Barrage'],['光束细胞','Beam Cell'],['充能电池','Charge Battery'],['爪击','Claw'],['寒流','Cold Snap'],['编译驱动','Compile Driver'],['冷静','Coolheaded'],['灾祸','Doom and Gloom'],['双倍能量','Double Energy'],['平衡','Equilibrium'],['直攻要害','Go for the Eyes'],['全息影像','Hologram'],['跃迁','Leap'],['递归','Recursion'],['回弹','Rebound'],['撕裂','Rip and Tear'],['堆积','Stack'],['蒸汽屏障','Steam Barrier'],['扫射光束','Sweeping Beam'],['聚变','Fusion'],['风暴','Tempest'],
+ ['自动护盾','Auto-Shields'],['暴风雪','Blizzard'],['正中红心','Bullseye'],['电容器','Capacitor'],['混沌','Chaos'],['寒意','Chill'],['消耗','Consume'],['黑暗','Darkness'],['碎片整理','Defragment'],['电动力学','Electrodynamics'],['裂变','Fission'],['力场','Force Field'],['遗传算法','Genetic Algorithm'],['冰川','Glacier'],['散热器','Heatsinks'],['你好世界','Hello World'],['循环','Loop'],['超频','Overclock'],['彩虹','Rainbow'],['重编程','Reprogram'],['倒带','Rewind'],['自我修复','Self Repair'],['略读','Skim'],['静电释放','Static Discharge'],['崩解','Sunder'],['白噪音','White Noise'],
+ ['合众为一','All for One'],['偏见认知','Biased Cognition'],['缓冲','Buffer'],['核心冲击','Core Surge'],['创意AI','Creative AI'],['回响形态','Echo Form'],['能量转换','Energy Conversion'],['超光速','FTL'],['超级光束','Hyperbeam'],['机器学习','Machine Learning'],['陨石打击','Meteor Strike'],['多重施法','Multi-Cast'],['寻觅','Seek']
+],
+wat: [
+ ['打击','Strike'],['防御','Defend'],['爆发','Eruption'],['警觉','Vigilance'],
+ ['渐强','Crescendo'],['只是走运','Just Lucky'],['保护','Protect'],['腰鞭','Sash Whip'],['评估','Evaluate'],['连环快打','Flurry of Blows'],['追击','Follow-Up'],['无惧邪恶','Fear No Evil'],['飞袖','Flying Sleeves'],['结论','Conclude'],['停止','Halt'],['宁静','Tranquility'],
+ ['与手交谈','Talk to the Hand'],['轮踢','Wheel Kick'],['崇拜','Worship'],['俯拜','Prostrate'],['心灵堡垒','Mental Fortress'],['涌动','Rushdown'],['雕刻现实','Carve Reality'],['切断命运','Cut Through Fate'],['空拳','Empty Fist'],['空心','Empty Mind'],['空身','Empty Body'],['异邦影响','Foreign Influence'],['节食','Fasting'],['干预','Intervention'],['如水','Like Water'],['冥想','Meditate'],['涅槃','Nirvana'],['坚持不懈','Perseverance'],['穴道','Pressure Points'],['轮回','Samsara'],['圣洁','Sanctity'],['酝酿怒火','Simmering Fury'],['学习','Study'],['暴怒','Tantrum'],['猛击','Wallop'],['挥手','Wave of the Hand'],['风车打击','Windmill Strike'],['虫洞','Wormholes'],
+ ['阿尔法','Alpha'],['弑神','Blasphemy'],['构想之刃','Conjure Blade'],['献身','Devotion'],['建立秩序','Establish Order'],['审判','Judgement'],['前车之鉴','Lesson Learned'],['主现实','Master Reality'],['全知','Omniscience'],['毁灭','Ruin'],['笔走龙蛇','Scrawl'],['时间跳跃','Vault'],['渴望','Wanderlust'],['愿望','Wish'],['诸神黄昏','Ragnarok']
+],
+col: [
+ ['神格化','Apotheosis'],['包扎','Bandage Up'],['盲目','Blind'],['深呼吸','Deep Breath'],['探索','Discovery'],['不耐','Impatience'],['样样精通','Jack of All Trades'],['恐慌按钮','Panic Button'],['清洗','Purge'],['迅疾打击','Swift Strike'],['绊倒','Trip'],['钢铁闪现','Flash of Steel'],['灵巧','Finesse'],['心灵爆破','Mind Blast'],['喘息','Second Wind'],['贪婪之手','Hand of Greed'],['魔法灯笼','Magnetism'],['变形','Metamorphosis'],['秘密技术','Secret Technique'],['秘密武器','Secret Weapon']
+]
+};
+
+var pickState = {};   /* en -> {zh, en, n} */
+var curChar = 'war';
+
+function chipList(){
+  var q = (document.getElementById('chipSearch').value || '').trim().toLowerCase();
+  var box = document.getElementById('chipBox');
+  box.innerHTML = '';
+  CARD_DB[curChar].forEach(function(c){
+    var zh = c[0], en = c[1];
+    if (q && zh.toLowerCase().indexOf(q) < 0 && en.toLowerCase().indexOf(q) < 0) return;
+    var d = document.createElement('button');
+    d.className = 'chip';
+    d.type = 'button';
+    d.innerHTML = zh + '<small>' + en + '</small>';
+    d.addEventListener('click', function(){ addPick(zh, en); });
+    box.appendChild(d);
+  });
+  if (!box.children.length) box.innerHTML = '<span class="muted">没匹配的牌 —— 直接写在下面的文本框里即可</span>';
+}
+
+function addPick(zh, en){
+  if (!pickState[en]) pickState[en] = {zh:zh, en:en, n:0};
+  pickState[en].n++;
+  renderPicked();
+}
+
+function renderPicked(){
+  var box = document.getElementById('pickedBox');
+  var keys = Object.keys(pickState);
+  if (!keys.length){ box.innerHTML = '<span class="muted" style="font-size:12.5px">还没选牌 —— 点上面的牌加入</span>'; }
+  else {
+    var h = '';
+    keys.forEach(function(k){
+      var c = pickState[k];
+      h += '<div class="pr"><span class="nm">' + c.zh + ' <span class="muted" style="font-size:11px">' + c.en + '</span></span>' +
+           '<button type="button" data-a="dec" data-k="' + k + '">−</button>' +
+           '<span>' + c.n + '</span>' +
+           '<button type="button" data-a="inc" data-k="' + k + '">+</button>' +
+           '<button type="button" class="del" data-a="del" data-k="' + k + '">✕</button></div>';
+    });
+    box.innerHTML = h;
+    box.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click', function(){
+        var k = b.dataset.k, a = b.dataset.a;
+        if (a === 'inc') pickState[k].n++;
+        if (a === 'dec'){ pickState[k].n--; if (pickState[k].n <= 0) delete pickState[k]; }
+        if (a === 'del') delete pickState[k];
+        renderPicked();
+      });
+    });
+  }
+  var total = 0, basic = 0;
+  keys.forEach(function(k){
+    total += pickState[k].n;
+    var e = pickState[k].en.toLowerCase();
+    if (e === 'strike' || e === 'defend') basic += pickState[k].n;
+  });
+  document.getElementById('pickStat').textContent = '已选 ' + total + ' 张' + (basic ? '（含基础牌 ' + basic + ' 张）' : '');
+}
+
+function pickedToText(){
+  var lines = [];
+  Object.keys(pickState).forEach(function(k){
+    var c = pickState[k];
+    lines.push(c.n > 1 ? (c.zh + ' x' + c.n) : c.zh);
+  });
+  return lines.join('\n');
+}
+
+(function(){
+  var tabs = document.querySelectorAll('#charTabs button');
+  tabs.forEach(function(b){
+    b.addEventListener('click', function(){
+      tabs.forEach(function(x){ x.classList.remove('on'); });
+      b.classList.add('on');
+      curChar = b.dataset.c;
+      document.getElementById('chipSearch').value = '';
+      chipList();
+    });
+  });
+  document.getElementById('chipSearch').addEventListener('input', chipList);
+  document.getElementById('btnPickClear').addEventListener('click', function(){ pickState = {}; renderPicked(); });
+  document.getElementById('btnPickDiag').addEventListener('click', function(){
+    var extra = document.getElementById('deck').value.trim();
+    var text = pickedToText();
+    if (extra && text) text = text + '\n' + extra; else if (extra) text = extra;
+    document.getElementById('deck').value = text;
+    window.__diag();
+    document.getElementById('outDeck').scrollIntoView({behavior:'smooth', block:'nearest'});
+  });
+  chipList();
+  renderPicked();
+})();
+
 </script>
 
 </body>
